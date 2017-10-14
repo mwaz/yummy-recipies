@@ -1,0 +1,93 @@
+body
+{
+    margin: 0;
+    padding: 0;
+    background:#fff ;
+    background-size: cover;
+    font-family: sans-serif;
+}
+.title
+{
+    text-align: center;
+    padding: 50px 0 20px;
+}
+.title h1
+{
+    margin: 0;
+    padding: 0;
+    color: #262626;
+    text-transform: none;
+    font-size: 39px;
+}
+
+.container
+{
+    width: 100%;
+    height: 500px;
+    background: #fff;
+    margin: 0 auto;
+    border: 2px solid #fff;
+
+}
+
+.FormBox
+{
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    height: 400px;
+    background: #fff;
+}
+.FormBox p
+{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+    color: #0a0608;
+}
+.FormBox input
+{
+    margin-bottom: 20px;
+    width: 100%;
+}
+.FormBox input[type="text"],
+.FormBox input[type="password"],
+.FormBox input[type="email"]
+{
+    border: none;
+    border-bottom: 2px solid #0a0608;
+    outline: none;
+    height: 40px;
+
+}
+.FormBox input[type="text"]:focus,
+.FormBox input[type="password"]:focus,
+.FormBox input[type="text"]:focus
+{
+    border-bottom: 2px solid #090e8e;
+}
+.FormBox input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    background: #262626;
+    cursor: pointer;
+
+}
+.FormBox input[type="submit"]:hover
+{
+    background: #090e8e;
+}
+.FormBox a
+{
+    color: #262626;
+    font-size: 12px;
+    font-weight: bold;
+}
+.panel-group
+{
+    margin-right: 20%;
+    margin-left: 20%;
+}
