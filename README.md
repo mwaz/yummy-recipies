@@ -5,8 +5,10 @@ awesome recipes and share with others if they so wish.
 
 # Contains
 
-The application contains the user interfaces for the yummy-recipies
+The application contains the user interfaces for the yummy-recipies,
+
 UML diagrams for the Project
+
 The falsk application for yummy-recipies
 
 #Prerequisites
