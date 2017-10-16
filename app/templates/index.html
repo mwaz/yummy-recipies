@@ -4,15 +4,8 @@
 <!-- Head Tag begins here -->
 <head>
 	<title>Index</title>
-
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/fonts/glyphicons-halflings-regular.ttf') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/fonts/glyphicons-halflings-regular.svg') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/fonts/glyphicons-halflings-regular.woff') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/fonts/glyphicons-halflings-regular.woff2') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/fonts/glyphicons-halflings-regular.eot') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <!-- Head Tag ends here -->
 
@@ -25,14 +18,14 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="registration.html"> Sign Up <span class="glyphicon glyphicon-tasks"></span></a></li>
-            <li><a href="login.html"> Log in </t> <span class="glyphicon glyphicon-log-in"></span></a></li>
+            <li><a href="login.html"> Log in <span class="glyphicon glyphicon-log-in"></span></a></li>
         </ul>
     </div>
 </nav>
 <!-- End of Navbar -->
 <div class="container-fluid">
 	<div class="img">
-	<center><img class="img-responsive" src="{{ url_for('static', filename='images/yummy.jpg')}}" width="70%" height="70%"></img></center>
+	<center><img class="img-responsive" src="{{ url_for('static', filename='images/yummy.jpg')}}" width="70%" height="70%"/></center>
 	</div>
 </div>
 </body>
