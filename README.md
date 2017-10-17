@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mwaz/yummy-recipies.svg?branch=challenge_two)](https://travis-ci.org/mwaz/yummy-recipies)
+
 # yummy-recipes
 
 Andela Bootcamp challenge which provides a platform for users to keep track of their
