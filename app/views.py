@@ -18,6 +18,9 @@ def login():
 def recipeCategories():
     return render_template('recipe-categories.html')
 
+@app.route('/recipes')
+def recipes():
+    return render_template('recipes.html')
 
 
 
