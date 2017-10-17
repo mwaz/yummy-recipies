@@ -17,6 +17,12 @@ class TestUsers(TestCase):
         res = self.newUser.user_register("waweru@gmail.com", "mwaz", "password","password")
         self.assertEqual(2, res, "User Account Created Successfully")
 
+    def test_null_email(self):
+        """Test to check if email is null"""
+        res = self.newUser.user_register(" ", "mwaz", "password", "password")
+        self.assertEqual(7, res, "Please provide an email address")
+
+
 
 
 
