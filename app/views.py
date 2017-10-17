@@ -14,6 +14,10 @@ def register():
 def login():
     return render_template('login.html')
 
+@app.route('/recipe-categories')
+def recipeCategories():
+    return render_template('recipe-categories.html')
+
 
 
 
