@@ -32,6 +32,13 @@ class TestUsers(TestCase):
         res = self.newUser.user_register("waweru@gmail.com", "mwaz", " ", "password")
         self.assertEqual(7, res, "No password provided")
 
+    def test_cpassword_is_equal_to_password(self):
+        """Test to check whether the confirm password and the passwords are similar """
+        res = self.newUser.user_register("waweru@gmail.com", "mwaz", "password", "pass")
+        self.assertEqual(4, res, "The passwords do not match")
+
+
+
 
 
 
