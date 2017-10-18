@@ -88,11 +88,11 @@ def login():
             return render_template("login.html", msg = message)
     return render_template("login.html")
 
-
-
-
-
-
+@app.before_request
+def before_request():
+    g.user = None
+    if 'user' in session:
+        g.user = session['user']
 
 
 
