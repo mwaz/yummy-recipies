@@ -3,7 +3,7 @@
 <!-- Head Tag begins here -->
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>Registration Form</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
@@ -25,11 +25,6 @@
     </div>
 </nav>
 <!-- End of Navbar -->
-
-  {% if msg %}
-<center> <div> {{ msg }}</div></center>
-{% endif %}
-
 <!-- beginning of class container which has the panels -->
 <div class="container">
     <div class="panel-group">
@@ -38,17 +33,18 @@
                 Yummy Recipes-User Registration 
             </div>
             <div class="panel-body">
+                <center> <div class="banner">  {{ msg }}</div></center>
                 <div class="right">
                     <div class="FormBox">
-                        <form action="{{url_for('register')}}" method="POST">
+                        <form action="/register" method="POST">
                             <p> Email </p>
-                            <input type="email" name="email" placeholder="someone@someone.com">
+                            <input type="email" name="email" placeholder="someone@someone.com" required>
                             <p> Username </p>
-                            <input type="text" name="username" placeholder="Someone">
+                            <input type="text" name="username" placeholder="Someone" required>
                             <p> Password</p>
-                            <input type="password" name="password" placeholder="*******">
+                            <input type="password" name="password" placeholder="*******" required>
                             <p> Confirm Password</p>
-                            <input type="password" name="cpassword" placeholder="*******">
+                            <input type="password" name="cpassword" placeholder="*******" required>
                             <button type="submit" class="btn btn-primary btn-lg">Register</button>
                         </form>
                     </div>
