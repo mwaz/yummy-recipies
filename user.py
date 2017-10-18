@@ -42,3 +42,14 @@ class Users(object):
         return 8
 
 
+    def user_login(self, email, password):
+        """Method to login user"""
+        if email != '' and password != '':
+            if email in users.keys():
+                res = users[email]
+                passwd = res['password']
+                if passwd == password:
+                    return 1
+                return 2
+            return 3
+        return 4
