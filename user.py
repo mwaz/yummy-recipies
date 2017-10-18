@@ -60,4 +60,8 @@ class Users(object):
             return resUser['name']
         return False
 
-   
+    def get_email(self, email):
+        if email in users.keys():
+            resEmail = users[email]
+            return resEmail['email']
+        return False
