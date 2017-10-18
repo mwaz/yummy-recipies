@@ -23,7 +23,6 @@ FOR HTTPS
 https://github.com/mwaz/yummy-recipies
 
 FOR SSH
-
 git@github.com:mwaz/yummy-recipies.git
 
 # Change Directory into the project folder
