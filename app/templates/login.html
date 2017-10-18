@@ -22,16 +22,16 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
         </div>
-
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/"> Home <span class="glyphicon glyphicon-home"> </a></li>
-        </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/register"> Sign Up <span class="glyphicon glyphicon-tasks"></span></a></li>
         </ul>
     </div>
 </nav>
 <!-- End of Navbar -->
+{% if msg %}
+  <center><div class="error">{{ msg }}</div></center>
+  {% endif %}
+
 <!-- Beginning of Container holding the panels  -->
 <div class="container">
     <div class="panel-group">
@@ -42,12 +42,12 @@
             <div class="panel-body">
                 <div class="right">
                     <div class="FormBox">
-                        <form>
-                            <p> Username</p>
-                            <input type="text" name="Username" placeholder="">
+                        <form action= "/login" method="POST">
+                            <p> Email </p>
+                            <input type="email" name="email" placeholder="">
                             <p> Password</p>
-                            <input type="password" name="Password" placeholder="">
-                            <button type="button" class="btn btn-primary btn-lg">Login</button> <br> <br>
+                            <input type="password" name="password" placeholder="">
+                            <button type="submit" class="btn btn-primary btn-lg">Login</button> <br> <br>
                         </form>
                     </div>
                 </div>
