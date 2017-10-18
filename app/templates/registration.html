@@ -33,7 +33,9 @@
                 Yummy Recipes-User Registration 
             </div>
             <div class="panel-body">
-                <center> <div class="banner">  {{ msg }}</div></center>
+            {% if msg %}
+                <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                {% endif %}
                 <div class="right">
                     <div class="FormBox">
                         <form action="/register" method="POST">
