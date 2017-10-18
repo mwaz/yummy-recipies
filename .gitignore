@@ -1,2 +1,4 @@
 .idea
 .coverage
+Pipfile
+Pipfile.locl
