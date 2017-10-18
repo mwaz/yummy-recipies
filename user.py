@@ -56,8 +56,8 @@ class Users(object):
 
     def get_username(self, email):
         if email in users.keys():
-            resUser = users['email']
-            return resUser['name']
+            resUser = users[email]
+            return resUser['username']
         return False
 
     def get_email(self, email):
