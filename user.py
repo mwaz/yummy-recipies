@@ -30,8 +30,8 @@ class Users(object):
                                 if re.search(regPassword, password):
                                     users[email] = {'username': username,
                                                     'email': email,
-                                                    'password': password}
-
+                                                    'password': password,
+                                                    }
                                     return 1
                                 return 2
                             return 3
