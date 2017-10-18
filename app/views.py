@@ -66,7 +66,7 @@ def login():
     if request.method == "POST":
         email = request.form['email']
         password =request.form['password']
-        resLogin = new_user.login(email,password)
+        resLogin = new_user.user_login(email,password)
         if resLogin == 1:
             username = new_user.get_username(email)
             email = new_user.get_email(email)
@@ -91,6 +91,7 @@ def login():
 
 @app.before_request
 def before_request():
+    """Method to declare sessions"""
     g.user = None
     if 'user' in session:
         g.user = session['user']
@@ -99,7 +100,7 @@ def before_request():
 def logout():
     """ method to logout a user"""
     session.pop('user', None)
-    return redirect(url_for('logins'))
+    return redirect(url_for('login'))
 
 
 
