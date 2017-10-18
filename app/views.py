@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, session
+from flask import Flask, render_template, redirect, request, session, g, url_for
 from flask import Flask
 app = Flask(__name__)
 from user import Users
@@ -20,7 +20,6 @@ def register():
     """ Handles the ciew for user registration"""
     if request.method == "POST":
         email = request.form['email']
-        print(email)
         username = request.form['username']
         password = request.form['password']
         cpassword = request.form['cpassword']
@@ -45,7 +44,7 @@ def register():
         elif res == 6:
             msg_output = "Username already taken"
             print("5")
-            return render_template("registration.html", ms=msg_output)
+            return render_template("registration.html", msg=msg_output)
         elif res == 4:
             msg_output = "Passwords dont match"
             return render_template("registration.html", msg=msg_output)
@@ -60,8 +59,45 @@ def register():
 
     return render_template("registration.html")
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    """Handles the requests for the login view"""
+    if request.method == "POST":
+        email = request.form['email']
+        password =request.form['password']
+        resLogin = new_user.login(email,password)
+        if resLogin == 1:
+            username = new_user.get_username(email)
+            email = new_user.get_email(email)
+            session['user'] = username
+            session['email'] = email
+            message = "login successful"
+            return render_template("recipe-categories.html", msg = message)
+
+        elif resLogin == 2:
+            message = "Passwords do not match"
+            return render_template("login.html", msg = message)
+        elif resLogin == 3:
+            message = "User does not exist, kindly try again"
+            return render_template("login.html", msg=message)
+        elif resLogin == 4:
+            message = "Kindly fill all fields"
+            return render_template("login.html", msg = message)
+        else:
+            message ="Invalid credentials, try again"
+            return render_template("login.html", msg = message)
+    return render_template("login.html")
 
 
+
+
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    app.run()
