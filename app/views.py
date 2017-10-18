@@ -59,6 +59,7 @@ def register():
 
     return render_template("registration.html")
 
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Handles the requests for the login view"""
@@ -94,7 +95,11 @@ def before_request():
     if 'user' in session:
         g.user = session['user']
 
-
+@app.route('/logout')
+def logout():
+    """ method to logout a user"""
+    session.pop('user', None)
+    return redirect(url_for('logins'))
 
 
 
