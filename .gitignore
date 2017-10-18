@@ -2,3 +2,6 @@
 .coverage
 Pipfile
 Pipfile.lock
+__pycache__
+app/__pycache__
+virtualenv
