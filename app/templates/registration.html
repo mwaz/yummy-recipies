@@ -26,6 +26,10 @@
 </nav>
 <!-- End of Navbar -->
 
+  {% if msg %}
+<center> <div> {{ msg }}</div></center>
+{% endif %}
+
 <!-- beginning of class container which has the panels -->
 <div class="container">
     <div class="panel-group">
@@ -36,16 +40,16 @@
             <div class="panel-body">
                 <div class="right">
                     <div class="FormBox">
-                        <form>
+                        <form action="{{url_for('register')}}" method="POST">
                             <p> Email </p>
-                            <input type="email" name="email_" placeholder="someone@someone.com">
+                            <input type="email" name="email" placeholder="someone@someone.com">
                             <p> Username </p>
-                            <input type="text" name="Username" placeholder="Someone">
+                            <input type="text" name="username" placeholder="Someone">
                             <p> Password</p>
-                            <input type="password" name="Password" placeholder="*******">
+                            <input type="password" name="password" placeholder="*******">
                             <p> Confirm Password</p>
-                            <input type="password" name="cPassword" placeholder="*******">
-                            <button type="button" class="btn btn-primary btn-lg">Register</button>
+                            <input type="password" name="cpassword" placeholder="*******">
+                            <button type="submit" class="btn btn-primary btn-lg">Register</button>
                         </form>
                     </div>
                 </div>
