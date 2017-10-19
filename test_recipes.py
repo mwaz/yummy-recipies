@@ -23,4 +23,9 @@ class RecipeTest(unittest.TestCase):
         output = self.recipes.create('', 'recipe_category_owner')
         self.assertEqual(4, output, "please fill all fields")
 
-   
+    def test_delete_recipe_category(self):
+        """defining method to test for deleting a recipe category"""
+        self.recipes.Recipes = {}
+        self.recipes.create('mwaz', 'waweru@gmail.com')
+        output = self.recipes.delete('mwaz')
+        self.assertEqual(1, output, "Succesfully deleted!")
