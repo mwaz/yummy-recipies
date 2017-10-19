@@ -2,18 +2,17 @@ import re
 
 users = {}
 
+
 class Users(object):
     """
       Users Class to handle  user functions like login and signup
       """
-
 
     def __init__(self, username=None, email=None, password=None):
         """ Initializing  class instance variables"""
         self.username = username
         self.email = email
         self.password = password
-
 
     def user_register(self, email, username, password, cpassasword):
         """ method that defines the elements required to create an account """
@@ -40,7 +39,6 @@ class Users(object):
                 return 6
             return 7
         return 8
-
 
     def user_login(self, email, password):
         """Method to login user"""

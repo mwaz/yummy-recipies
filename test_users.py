@@ -14,7 +14,7 @@ class TestUsers(TestCase):
 
     def test_user_register(self):
         """ Test to test function user_register """
-        res = self.newUser.user_register("waweru@gmail.com", "mwaz", "password","password")
+        res = self.newUser.user_register("waweru@gmail.com", "mwaz", "password", "password")
         self.assertEqual(2, res, "User Account Created Successfully")
 
     def test_null_email_field(self):
@@ -46,11 +46,3 @@ class TestUsers(TestCase):
         """ Test to check whether confirm password field is empty"""
         res = self.newUser.user_register("waweru@gmail.com", "mwaz", "password", " ")
         self.assertEqual(7, res, "Confirm Password field is empty")
-
-
-
-
-
-
-
-

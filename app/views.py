@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, session, g, url_for
+from flask import render_template, redirect, request, session, g, url_for
 from flask import Flask
 app = Flask(__name__)
 from user import Users
@@ -9,6 +9,7 @@ new_user = Users()
 """Objects Instatiation"""
 app.secret_key = os.urandom(24)
 
+
 @app.route('/')
 def index():
     """ Redirects to the index page """
@@ -16,7 +17,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     """ Handles the ciew for user registration"""
     if request.method == "POST":
@@ -66,29 +67,30 @@ def login():
     """Handles the requests for the login view"""
     if request.method == "POST":
         email = request.form['email']
-        password =request.form['password']
-        resLogin = new_user.user_login(email,password)
+        password = request.form['password']
+        resLogin = new_user.user_login(email, password)
         if resLogin == 1:
             username = new_user.get_username(email)
             email = new_user.get_email(email)
             session['user'] = username
             session['email'] = email
             message = "login successful"
-            return render_template("recipe-categories.html", msg = message)
+            return render_template("recipe-categories.html", msg=message)
 
         elif resLogin == 2:
             message = "Passwords do not match"
-            return render_template("login.html", msg = message)
+            return render_template("login.html", msg=message)
         elif resLogin == 3:
             message = "User does not exist, kindly try again"
             return render_template("login.html", msg=message)
         elif resLogin == 4:
             message = "Kindly fill all fields"
-            return render_template("login.html", msg = message)
+            return render_template("login.html", msg=message)
         else:
-            message ="Invalid credentials, try again"
-            return render_template("login.html", msg = message)
+            message = "Invalid credentials, try again"
+            return render_template("login.html", msg=message)
     return render_template("login.html")
+
 
 @app.before_request
 def before_request():
@@ -97,12 +99,9 @@ def before_request():
     if 'user' in session:
         g.user = session['user']
 
+
 @app.route('/logout')
 def logout():
     """ method to logout a user"""
     session.pop('user', None)
     return redirect(url_for('login'))
-
-
-
-

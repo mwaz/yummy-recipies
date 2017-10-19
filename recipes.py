@@ -7,23 +7,27 @@ Recipeitems = []
 class Recipe(object):
     Recipes = {}
 
-    def __init__(self, recipe_category = None, recipes_owner = None, recipe = None):
+    def __init__(self, recipe_category=None, recipes_owner=None, recipe=None):
         """Initialization of recipe class variables"""
 
         self.recipe_category = recipe_category
         self.owner = recipes_owner
         self.recipe = recipe
 
-    def create (self, recipe_category, recipes_owner):
+    def create(self, recipe_category, recipes_owner):
         """defining method to create  a recipe category"""
         if re.match("[a-zA-Z0-9- .]+$", recipe_category):
             if recipe_category != '':
                 # call the get_recipes function that contains individual recipes
                 recipe_categories = self.get_recipes(recipes_owner)
-                if recipe_categories != {}: #returns all recipe categories
-                    #check if a user has a recipes in a recipe category
+                if recipe_categories != {}:
+                    """
+                    returns all recipe categories
+                    check if a user has a recipes in a recipe category
+                    """
                     if recipe_category not in recipe_categories.keys():
-                        self.Recipes[recipe_category] = {"recipe_category": recipe_category, "recipes_owner": recipes_owner,}
+                        self.Recipes[recipe_category] = {"recipe_category": recipe_category,
+                                                         "recipes_owner": recipes_owner, }
                         return 1
                     return 2
                 else:
@@ -33,8 +37,7 @@ class Recipe(object):
             return 3
         return 4
 
-
-    def get_recipes(self, recipes_owner):
+    def get_recipes(self,):
         """ Method to get a users recipe categories """
         data = self.recipe
         recipe_categories = {}
@@ -44,11 +47,11 @@ class Recipe(object):
             recipes_owner = recipes['recipes_owner']
             if recipes_owner == recipes_owner:
                 recipe_categories[recipes_owner] = {
-                    "recipe_category" : recipe_category,
-                    "recipes_owner" : recipes_owner
+                    "recipe_category": recipe_category,
+                    "recipes_owner": recipes_owner
                 }
             else:
-                res =  recipe_categories
+                res = recipe_categories
         return recipe_categories
 
     def delete(self, recipe_category):
@@ -73,8 +76,7 @@ class Recipe(object):
         """ Method definition on how to retrieve recipe categories"""
         return self.Recipes
 
-
-    def get_recipe_category(self,recipe_category):
+    def get_recipe_category(self, recipe_category):
         """Method definition to get a single recipe category"""
         return self.Recipes[recipe_category]
 
@@ -90,24 +92,21 @@ class Recipe(object):
             return 3
         return 4
 
-
     @classmethod
     def createrecipes(cls, recipe, recipe_category, recipes_owner):
         """Method definition to create recipes in the recipe categories"""
         if re.match("[a-zA-Z0-9- .]+$", recipe):
             if recipe != '':
                 recipe_category.append(
-                    {'recipe_category': recipe_category, 'recipe': recipe, 'recipes_owner': recipes_owner })
+                    {'recipe_category': recipe_category, 'recipe': recipe, 'recipes_owner': recipes_owner})
                 return 1
             return 2
         return 3
-
 
     @classmethod
     def getrecipes(cls):
         """ method definition to get a recipe from a recipe_category """
         return Recipeitems
-
 
     @classmethod
     def editrecipe(cls, recipe, old):
@@ -122,7 +121,6 @@ class Recipe(object):
             return 2
         return 3
 
-
     @classmethod
     def deleterecipe(cls, recipe, recipe_category):
         """Method to delete a recipe from a recipe category"""
@@ -131,17 +129,3 @@ class Recipe(object):
                 del Recipeitems[dic]
                 return 1
         return 2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
