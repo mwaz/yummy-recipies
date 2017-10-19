@@ -124,7 +124,14 @@ class Recipe(object):
         return 3
 
 
-   
+    @classmethod
+    def deleterecipe(cls, recipe, recipe_category):
+        """Method to delete a recipe from a recipe category"""
+        for dic in range(0, len(Recipeitems)):
+            if Recipeitems[dic]['recipe'] == recipe and Recipeitems[dic]['recipe_category'] == recipe_category:
+                del Recipeitems[dic]
+                return 1
+        return 2
 
 
 
