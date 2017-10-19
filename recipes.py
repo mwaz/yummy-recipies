@@ -79,7 +79,21 @@ class Recipe(object):
         """Method definition to get a single recipe category"""
         return self.Recipes[recipe_category]
 
+    def edit(self, old, recipe_category, recipes_owner):
+        """Method to edit a recipe category"""
+        if re.match("[a-zA-Z0-9- .]+$", recipe_category):
+            if recipe_category != '':
+                if old in self.Recipes.keys():
+                    del self.Recipes[old]
+                    self.Recipes[recipe_category] = {'recipe_category': recipe_category, 'recipes_owner': recipes_owner}
+                    return 1
+                return 2
+            return 3
+        return 4
+
+
     
+
 
 
 
