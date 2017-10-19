@@ -3,7 +3,7 @@ from unittest import TestCase
 from user import Users
 
 
-class TestUsers(TestCase):
+class TestUsers(unittest.TestCase):
     """
     class to test the class user
     """
