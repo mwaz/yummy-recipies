@@ -104,7 +104,12 @@ class Recipe(object):
         return 3
 
 
-    
+    @classmethod
+    def getrecipes(cls):
+        """ method definition to get a recipe from a recipe_category """
+        return Recipeitems
+
+
 
 
 
