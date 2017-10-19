@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect, request, session, g, url_for
 from flask import Flask
 app = Flask(__name__)
 from user import Users
+from app import app
 
 new_user = Users()
 """Objects Instatiation"""
@@ -105,5 +106,3 @@ def logout():
 
 
 
-if __name__ == '__main__':
-    app.run()
