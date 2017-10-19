@@ -6,7 +6,6 @@ Recipeitems = []
 
 class Recipe(object):
     Recipes = {}
-    shared_recipes = {}
 
     def __init__(self, recipe_category = None, recipes_owner = None, recipe = None):
         """Initialization of recipe class variables"""
