@@ -28,10 +28,6 @@
     </div>
 </nav>
 <!-- End of Navbar -->
-{% if msg %}
-  <center><div class="error">{{ msg }}</div></center>
-  {% endif %}
-
 <!-- Beginning of Container holding the panels  -->
 <div class="container">
     <div class="panel-group">
@@ -40,6 +36,9 @@
                 Yummy Recipies Login Form
             </div>
             <div class="panel-body">
+                 {% if msg %}
+                <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                {% endif %}
                 <div class="right">
                     <div class="FormBox">
                         <form action= "/login" method="POST">
