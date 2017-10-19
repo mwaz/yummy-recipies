@@ -18,4 +18,9 @@ class RecipeTest(unittest.TestCase):
         output = self.recipes.create('recipe_category', 'waweru@gmail.com')
         self.assertEqual(4, output, "Recipe category successfully created")
 
- 
+    def test_if_recipes_name_is_empty(self):
+        """ method definition to test for adding a recipe with an empty title """
+        output = self.recipes.create('', 'recipe_category_owner')
+        self.assertEqual(4, output, "please fill all fields")
+
+   
