@@ -70,7 +70,12 @@ class Recipe(object):
                 return 1
         return 2
 
-   
+    def get_recipe_categories(self):
+        """ Method definition on how to retrieve recipe categories"""
+        return self.Recipes
+
+
+    
 
 
 
