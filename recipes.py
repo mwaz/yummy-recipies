@@ -110,6 +110,22 @@ class Recipe(object):
         return Recipeitems
 
 
+    @classmethod
+    def editrecipe(cls, recipe, old):
+        """Method definition to edit a recipe in recipe categories"""
+        if re.match("[a-zA-Z0-9- .]+$", recipe):
+            if recipe != "":
+                for dic in range(len(Recipeitems)):
+                    if Recipeitems[dic]['recipe'] == old:
+                        del Recipeitems[dic]['recipe']
+                        Recipeitems[dic]['recipe'] = recipe
+                        return 1
+            return 2
+        return 3
+
+
+   
+
 
 
 
