@@ -92,8 +92,19 @@ class Recipe(object):
         return 4
 
 
-    
+    @classmethod
+    def createrecipes(cls, recipe, recipe_category, recipes_owner):
+        """Method definition to create recipes in the recipe categories"""
+        if re.match("[a-zA-Z0-9- .]+$", recipe):
+            if recipe != '':
+                recipe_category.append(
+                    {'recipe_category': recipe_category, 'recipe': recipe, 'recipes_owner': recipes_owner })
+                return 1
+            return 2
+        return 3
 
+
+    
 
 
 
