@@ -35,7 +35,26 @@ class Recipe(object):
         return 4
 
 
+    def get_recipes(self, recipes_owner):
+        """ Method to get a users recipe categories """
+        data = self.recipe
+        recipe_categories = {}
+        for recipe_category in data.keys():
+            #looping through the recipe categories
+            recipes = data[recipe_category]
+            recipes_owner = recipes['recipes_owner']
+            if recipes_owner == recipes_owner:
+                recipe_categories[recipes_owner] = {
+                    "recipe_category" : recipe_category,
+                    "recipes_owner" : recipes_owner
+                }
+            else:
+                res =  recipe_categories
+        return recipe_categories
+
     
+
+
 
 
 
