@@ -52,7 +52,25 @@ class Recipe(object):
                 res =  recipe_categories
         return recipe_categories
 
-    
+    def delete(self, recipe_category):
+        """ method to delete a recipe category"""
+        if recipe_category in self.Recipes.keys():
+            # checks if the recipe_category being deleted exists
+            if Recipeitems:
+                for dic in range(0, len(Recipeitems)):
+                    if Recipeitems[dic]['recipe_category'] == recipe_category:
+                        del Recipeitems[dic]['recipe']
+                        del Recipeitems[dic]['recipe_category']
+                        del Recipeitems[dic]['recipes_owner']
+                        del self.Recipes[recipe_category]
+                        return 1
+                return 2
+            else:
+                del self.Recipes[recipe_category]
+                return 1
+        return 2
+
+   
 
 
 
