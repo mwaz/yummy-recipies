@@ -57,3 +57,6 @@ Run the program by typing the command in your terminal :
 
 $  (yourenvname) python run.py
 you can now use the application.
+
+# Live App on heroku
+    https://yummy-recipies.herokuapp.com
