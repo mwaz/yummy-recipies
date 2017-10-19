@@ -75,8 +75,11 @@ class Recipe(object):
         return self.Recipes
 
 
-    
+    def get_recipe_category(self,recipe_category):
+        """Method definition to get a single recipe category"""
+        return self.Recipes[recipe_category]
 
+    
 
 
 
