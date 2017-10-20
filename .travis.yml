@@ -8,7 +8,6 @@ script:
      - "nose2 test_recipes"
      - "coverage run test_users.py"
      - "coverage run test_recipes.py"
-     - "coverage run recipes.py"
-     - "coverage run user.py"
+     - "nosetests --exe --with-coverage --cover-package=app"
 after_success: coveralls
 
