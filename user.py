@@ -42,15 +42,18 @@ class Users(object):
 
     def user_login(self, email, password):
         """Method to login user"""
-        if email != '' and password != '':
-            if email in users.keys():
-                res = users[email]
-                passwd = res['password']
-                if passwd == password:
-                    return 1
-                return 2
-            return 3
-        return 4
+        if email != ' ' and password != ' ':
+            if email != '' and password != '':
+                if email in users.keys():
+                    res = users[email]
+                    passwd = res['password']
+                    if passwd == password:
+                        return 1
+                    return 2
+                return 3
+            return 4
+        return 5
+
 
     def get_username(self, email):
         if email in users.keys():
