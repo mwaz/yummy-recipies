@@ -16,7 +16,8 @@ class Recipe(object):
 
     def create(self, recipe_category, recipes_owner):
         """defining method to create  a recipe category"""
-        if re.match("[a-zA-Z0-9- .]+$", recipe_category):
+        name_reg = "[a-zA-Z0-9- .]+$"
+        if re.match(name_reg, recipe_category):
             if recipe_category != '':
                 # call the get_recipes function that contains individual recipes
                 recipe_categories = self.get_recipes(recipes_owner)
