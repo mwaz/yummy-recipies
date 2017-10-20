@@ -89,4 +89,6 @@ class TestUsers(unittest.TestCase):
         result = self.newUser.user_login(' ', 'pass')
         self.assertEqual(5, result, "Email field is empty")
 
-   
+    def test_empty_password(self):
+        result = self.newUser.user_login('waweru@gmail.com', ' ')
+        self.assertEqual(5, result,"Password filed is empty")
