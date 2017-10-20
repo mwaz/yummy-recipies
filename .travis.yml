@@ -10,7 +10,5 @@ script:
      - "coverage run test_recipes.py"
      - "coverage run recipes.py"
      - "coverage run user.py"
-     - "nosetests --exe -v"
-     - "nosetests --exe --with-coverage --cover-package=app"
 after_success: coveralls
 
