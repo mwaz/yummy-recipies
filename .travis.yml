@@ -8,9 +8,8 @@ script:
      - "python test_recipes.py"
      - "coverage run test_users.py"
      - "coverage run test_recipes.py"
-     - "coverage run app/__init.py"
-     - "coverage run app/__init.py"
+     - "coverage run app/__init__.py"
      - "coverage run recipes.py"
-     - "coverage run users.py"
+     - "coverage run user.py"
 after_success: coveralls
 
