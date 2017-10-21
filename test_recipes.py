@@ -36,3 +36,4 @@ class RecipeTest(unittest.TestCase):
         """Test to check if category_name follows the one specified by regex"""
         category_registration = self.newCat.category_register("&#*", "waweru@gmail.com")
         self.assertEqual("205,Regex mismatch", category_registration, "category name is invalid")
+
