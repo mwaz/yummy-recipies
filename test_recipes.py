@@ -32,4 +32,7 @@ class RecipeTest(unittest.TestCase):
         category_registration = self.newCat.category_register(" ", "waweru@gmail.com")
         self.assertEqual("205,Invalid Name", category_registration, "category name is empty")
 
- 
+    def test_invalid_category_name(self):
+        """Test to check if category_name follows the one specified by regex"""
+        category_registration = self.newCat.category_register("&#*", "waweru@gmail.com")
+        self.assertEqual("205,Regex mismatch", category_registration, "category name is invalid")
