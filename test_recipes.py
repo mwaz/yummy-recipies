@@ -14,3 +14,12 @@ class RecipeTest(unittest.TestCase):
         self.newCat.category_register("category_one", "waweru@gmail.com")
         category_registration = self.newCat.category_register("category", "waweru@gmail.com")
         self.assertEqual("200,OK", category_registration, " success in creating category")
+
+    def test_category_exists(self):
+        """ Test to check if category_name exists """
+        self.newCat.recipe_categories = {}
+        self.newCat.category_register("category", "waweru@gmail.com")
+        category_registration = self.newCat.category_register("category", "waweru@gmail.com")
+        self.assertEqual("204,Category exists", category_registration, "category name already exists")
+
+   
