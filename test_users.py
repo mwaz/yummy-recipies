@@ -6,15 +6,14 @@ class TestUsers(unittest.TestCase):
     """
     class to test the class user
     """
-
-
     def setUp(self):
         """ Method called to prepare the test fixture """
         self.newUser = Users()
 
     def test_member_register(self):
         """ Test to test function member_register """
-        self.newUser.users = {} #users dictionary to check whether the user already exists
+        self.newUser.users = {}
+        #users dictionary to check whether the user already exists
         self.newUser.member_register("waweru@gmail.com", "mwaz", "password", "password")
         result = self.newUser.member_register("waweru@gmail.com", "mwaz", "password", "password")
         self.assertEqual(2, result, "User Account Created Successfully")
@@ -66,17 +65,16 @@ class TestUsers(unittest.TestCase):
     def test_wrong_email_login(self):
         """ method to test if the email used for login is wrong"""
         self.newUser.users = {}
-        self.newUser.member_register('waweru@gmail.com', 'mwaz', 'pass','pass')
+        self.newUser.member_register('waweru@gmail.com', 'mwaz', 'pass', 'pass')
         result = self.newUser.user_login('wawerum@gmail.com', 'pass')
         self.assertEqual(3, result, "wrong login credentials")
 
     def test_null_email_login(self):
         """ method to test if the email used for login is null"""
-        result = self.newUser.user_login('','pass')
-        self.assertEqual(4,result, "Kindly fill the email field")
+        result = self.newUser.user_login('', 'pass')
+        self.assertEqual(4, result, "Kindly fill the email field")
 
-
-    def test_null_password(self):
+    def test_null_login_password(self):
         """ method to test if the password used for login is null """
         result = self.newUser.user_login('waweru@gmail.com', '')
         self.assertEqual(4, result, "Kindly fill the password field")
@@ -92,4 +90,4 @@ class TestUsers(unittest.TestCase):
 
     def test_empty_password(self):
         result = self.newUser.user_login('waweru@gmail.com', ' ')
-        self.assertEqual(5, result,"Password filed is empty")
+        self.assertEqual(5, result, "Password filed is empty")
