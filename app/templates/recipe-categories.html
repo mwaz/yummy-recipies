@@ -4,7 +4,15 @@
     <meta charset="UTF-8">
     <title>Recipe Categories </title>
    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+
+      </head>
+
     <style>
         .dashboard .container  .panel-group
         {
@@ -19,9 +27,10 @@
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"</a>
+            <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
         </div>
         <ul class="nav navbar-nav navbar-right">
+               <li><a href="/logout"> <span class="glyphicon glyphicon-user"></span> Welcome {{ session['user'] }}  </a></li>
             <li><a href="/logout"> Logout <span class="glyphicon glyphicon-log-out"></span> </a></li>
         </ul>
     </div>
@@ -33,30 +42,87 @@
         <div class="panel panel-group">
             <div class="panel panel-primary">
                 <div class="panel panel-heading">Yummy Recipes - Categories </div>
+                {% if msg %}
+                <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                {% endif %}
+
+                {% if success %}
+                <center> <div class="alert alert-success">  {{ success }}</div></center>
+                {% endif %}
                 <div class="panel panel-body">
                 <!-- Beginning of Table -->
-                    <button type="button" class="btn btn-primary ">Add Recipe Categories </button> <br>
+
+                   <!-- Modal -->
+                    <a href="#modalForm" role="button" data-toggle="modal" class="btn btn-primary data">  Add Recipe Categories </a>
+
+                    <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <!-- Content of modal-->
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="close"
+                                   data-dismiss="modal">
+                                       <span aria-hidden="true">&times;</span>
+                                       <span class="sr-only">Close</span>
+                                </button>
+                                <h4 class="modal-title" id="modal_label">
+                                    Create Recipe Category
+                                </h4>
+                            </div>
+
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+
+                                <form role="form" action="/cat_register" method="POST">
+
+                                  <div class="form-group">
+                                    <center><label for="category_name">Category Name </label></center>
+                                      <input type="hidden" class="form-control"
+                                          id="cait_owner" name="category_owner" value="{{ session['user']}}"/>
+
+                                      <input type="text" class="form-control"
+                                          id="category_name" placeholder="category name" name="category_name"/>
+                                  </div>
+
+
+
+
+
+                            <!-- Modal Footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">
+                                            Close
+                                </button>
+                               <button type="submit" class="btn btn-default">Create Category
+                               </button>
+                            </div>
+                              </form>
+                                    </div>
+                        </div>
+                    </div>
+                </div>
+
+
                     <table class="table table-bordered">
                         <thead>
                         <tr> <br> </tr>
-                        <tr>
-                            <td>Breakfast</td>
+                        <tr> <br> </tr>
+
+                            {% for recipe_categories in data %}
+
+                         <tr>
+                            <td> {{ recipe_categories }}  </td>
                             <td> <a href="#"> View </a> </td>
                             <td> <a href="#"> Update </a> </td>
                             <td><a href="#"> Delete </a> </td>
                         </tr>
-                        <tr>
-                            <td> Lunch</td>
-                            <td> <a href="#"> View </a> </td>
-                            <td><a href="#"> Update</a> </td>
-                            <td> <a href="#"> Delete </a> </td>
-                        </tr>
-                         <tr>
-                            <td> Beverages</td>
-                            <td> <a href="#"> View </a> </td>
-                            <td><a href="#"> Update</a> </td>
-                            <td> <a href="#"> Delete </a> </td>
-                        </tr>
+                        {% endfor %}
+
+
+
+
                         </thead>
                     </table>
                 </div>
