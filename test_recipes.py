@@ -22,4 +22,9 @@ class RecipeTest(unittest.TestCase):
         category_registration = self.newCat.category_register("category", "waweru@gmail.com")
         self.assertEqual("204,Category exists", category_registration, "category name already exists")
 
-   
+    def test_empty_category(self):
+        """ Test to check empty category name """
+        category_empty = self.newCat.category_register("", "waweru@gmail.com")
+        self.assertEqual("205,Regex mismatch", category_empty, "category name is null")
+
+  
