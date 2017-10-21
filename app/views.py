@@ -1,15 +1,15 @@
 import os
-import random
-from flask import render_template, redirect, request, session, g, url_for
-from flask import Flask
-app = Flask(__name__)
+from flask import render_template,request, session, g,Flask, url_for
 from user import Users
 from recipe import Recipe
+app = Flask(__name__)
 from app import app
 
-category_id = random.choice(range(0, 50))
+
 new_user = Users()
 new_cat = Recipe()
+
+
 """Objects Instatiation"""
 app.secret_key = os.urandom(24)
 
@@ -17,29 +17,27 @@ app.secret_key = os.urandom(24)
 @app.route('/')
 def index():
     """ Redirects to the index page """
-
     return render_template('index.html')
-
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     """ Handles the ciew for user registration"""
     if request.method == "POST":
         email = request.form['email']
-        username = request.form['username']
+        member = request.form['username']
         password = request.form['password']
         cpassword = request.form['cpassword']
-        res = new_user.user_register(email, username, password, cpassword)
+        res = new_user.member_register(email, member, password, cpassword)
         if res == 1:
-            session['user'] = username
+            session['user'] = member
             msg_output = "Successfully created Account"
-            return render_template('login.html', msg=msg_output)
+            return render_template('login.html', success=msg_output)
         elif res == 7:
             msg_output = "please fill in all the fields"
             return render_template("registration.html", msg=msg_output)
 
-        elif res == 8:
-            msg_output = "Special characters are not allowed in username"
+        elif res == "205,Regex mismatch":
+            msg_output = "Special characters are not allowed in member field"
             return render_template("registration.html", msg=msg_output)
 
         elif res == 2:
@@ -47,7 +45,7 @@ def register():
             return render_template("registration.html", msg=msg_output)
 
         elif res == 6:
-            msg_output = "Username already taken"
+            msg_output = "member name already taken"
             print("5")
             return render_template("registration.html", msg=msg_output)
         elif res == 4:
@@ -73,12 +71,12 @@ def login():
         password = request.form['password']
         resLogin = new_user.user_login(email, password)
         if resLogin == 1:
-            username = new_user.get_username(email)
+            member = new_user.get_member(email)
             email = new_user.get_email(email)
-            session['user'] = username
+            session['user'] = member
             session['email'] = email
             message = "login successful"
-            return render_template("recipe-categories.html", msg=message)
+            return render_template("recipe-categories.html", success=message)
 
         elif resLogin == 2:
             message = "Passwords do not match"
@@ -107,35 +105,39 @@ def before_request():
 def logout():
     """ method to logout a user"""
     session.pop('user', None)
-    return redirect(url_for('login'))
+    return render_template("login.html")
 
 @app.route('/cat_register', methods=['GET', 'POST'])
 def category_register():
     """ Method to create a category """
-    if request.method == "POST":
-        cat_name = request.form['category_name']
-        cat_id = request.form['category_name']
-        owner = request.form['category_owner']
+    if g.user:
+        if request.method == "POST":
+            cat_name = request.form['category_name']
+            owner = request.form['category_owner']
+            category_create = new_cat.category_register(cat_name,owner)
 
-        category_create = new_cat .category_register(cat_name,cat_id, owner)
-        if category_create == 1:
-            message = "Successfully created category"
-            return render_template("recipe-categories.html", msg=message)
+            category_data = new_cat.recipe_categories
+            render_category = []
+            for category in category_data:
+                if category_data[category]['owner'] == owner:
+                    render_category.append(category)
+                    if render_category == []:
+                        url_for('/recipe-categories')
 
-        elif category_create == 2:
-            message = "Category id already exists"
-            return render_template("recipe-categories.html", msg=message)
-        elif category_create == 3:
-            message = "Category already exists"
-            return render_template("recipe_categories", msg=message)
-        elif category_create == 4:
-            message = "Kindly input category name"
-            return render_template("recipe_categories.html", msg=message)
-        elif category_create == 5:
-            message = "No special characters allowed in category name"
-            return render_template("recipe_categories.html", msg=message)
-        else:
-            message = "unable to create category"
-            return render_template("recipe_categories", msg=message)
-    return render_template("recipe_categories.html")
+            if category_create == "200,OK":
+                message = "Successfully created category"
+                return render_template("recipe-categories.html", success=message, data=category_data)
+            elif category_create == "204,Category exists":
+                message = "Category exists"
+                return render_template("recipe-categories.html", msg=message)
+            elif category_create == "205,Invalid Name":
+                message = "Invalid Category Name"
+                return render_template("recipe-categories.html", msg=message)
+            else:
+                message = "unable to create category"
+                return render_template("recipe-categories", msg=message)
+
+    return render_template("login.html")
+
+
 
