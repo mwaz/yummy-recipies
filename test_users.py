@@ -48,9 +48,9 @@ class TestUsers(unittest.TestCase):
         result = self.newUser.member_register("waweru@gmail.com", "mwaz", "password", " ")
         self.assertEqual(7, result, "Confirm Password field is empty")
 
-    def test_invalid_member_name (self):
+    def test_invalid_member_name(self):
         """Test to check if member_name follows the one specified by regex"""
-        member_registration= self.newUser.member_register("waweru@gmail.com", "&#*", "password", "password")
+        member_registration = self.newUser.member_register("waweru@gmail.com", "&#*", "password", "password")
         self.assertEqual("205,Regex mismatch", member_registration, "member name is invalid")
 
     def test_success_login(self):
