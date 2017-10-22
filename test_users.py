@@ -26,7 +26,7 @@ class TestUsers(unittest.TestCase):
     def test_invalid_member_email(self):
         """Test to ceck emial pattern of member"""
         result = self.newUser.member_register("waweru.waweru.com", "mwaz", "password", "password")
-        self.assertIn("205,Email Regex mismatch",result,"205,Email Regex mismatch")
+        self.assertIn("205,Email Regex mismatch", result, "205,Email Regex mismatch")
 
     def test_null_member(self):
         """Test to check if member name is null"""
