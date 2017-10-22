@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <style type="text/css">
-        .panel-body 
+        .panel-body
         {
             height: 420px;
         }
@@ -40,8 +40,7 @@
                 <center> <div class="alert alert-danger">  {{ msg }}</div></center>
                 {% endif %}
 
-                <div class="panel-body">
-                 {% if success %}
+                {% if success %}
                 <center> <div class="alert alert-success">  {{ success }}</div></center>
                 {% endif %}
                 <div class="right">
