@@ -24,17 +24,14 @@ class Users(object):
                         if password == cpassasword:
                             if re.search(regEmail, email):
                                 if re.search(regPassword, password):
-                                    users[email] = {'member': member,
-                                                    'email': email,
-                                                    'password': password,
-                                                    }
-                                    return 1
-                                return 2
-                            return 3
-                        return 4
-                    return 5
-                return 6
-            return 7
+                                    users[email] = {'member': member,'email': email,'password': password,}
+                                    return "200,OK"
+                                return "205,Password Regex mismatch"
+                            return "205,Email Regex mismatch"
+                        return "400,Passwords dont match"
+                    return "401,Email exists"
+                return "401,Member exists"
+            return "205,Invalid input"
         return "205,Regex mismatch"
 
     def user_login(self, email, password):
@@ -45,11 +42,11 @@ class Users(object):
                     result = users[email]
                     passwd = result['password']
                     if passwd == password:
-                        return 1
-                    return 2
-                return 3
-            return 4
-        return 5
+                        return "200,OK"
+                    return "205,Password mismatch"
+                return "404,User not found"
+            return "205,Invalid input"
+        return "205,Empty input"
 
 
     def get_member(self, email):
