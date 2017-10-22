@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/mwaz/yummy-recipies.svg?branch=challenge_two)](https://travis-ci.org/mwaz/yummy-recipies)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 Andela Bootcamp challenge which provides a platform for users to keep track of their
 awesome recipes and share with others if they so wish.
 
