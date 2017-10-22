@@ -78,16 +78,9 @@
 
                                   <div class="form-group">
                                     <center><label for="category_name">Category Name </label></center>
-                                      <input type="hidden" class="form-control"
-                                          id="cait_owner" name="category_owner" value="{{ session['user']}}"/>
-
                                       <input type="text" class="form-control"
                                           id="category_name" placeholder="category name" name="category_name"/>
                                   </div>
-
-
-
-
 
                             <!-- Modal Footer -->
                             <div class="modal-footer">
@@ -114,13 +107,22 @@
 
                          <tr>
                             <td> {{ recipe_categories }}  </td>
-                            <td> <a href="#"> View </a> </td>
+
+
+                            <td>
+                                <form action="/view_category" method="POST">
+
+                                    <input type="hidden" name="category_name" value=" {{ recipe_categories }} " hidden>
+                                    <button type="submit" class="btn btn-primary"> View</button>
+                                </form>
+
+                            </td>
+
+
                             <td> <a href="#"> Update </a> </td>
                             <td><a href="#"> Delete </a> </td>
                         </tr>
                         {% endfor %}
-
-
 
 
                         </thead>
