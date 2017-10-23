@@ -167,3 +167,40 @@ def view_category():
     return render_template("login.html")
 
 
+
+@app.route('/recipe_register', methods=['GET', 'POST'])
+def recipe_register():
+    """method to create a recipe """
+    if g.member:
+        if request.method == "POST":
+            recipe_name = request.form['recipe_name']
+            cat_name = request.form['category_name']
+            owner = g.member
+
+            recipe_create = new_cat.recipe_register(cat_name, recipe_name, owner)
+
+            category_name = cat_name
+            recipe_data = new_cat.recipes
+            render_recipe = []
+            for recipe in recipe_data:
+                if recipe_data[recipe]['cat_name'] == cat_name:
+                     render_recipe.append(recipe)
+
+            if recipe_create == "200,OK":
+                message = "Successfully created recipe"
+                return render_template("recipes.html", success=message, data=render_recipe, message = category_name)
+            elif recipe_create == "204,Recipe exists":
+                message = "Recipe exists"
+                return render_template("recipes.html", msg=message, data=recipe_data)
+            elif recipe_create == "205,Invalid Name":
+                message = "Invalid Recipe Name"
+                return render_template("recipes.html", msg=message, data=recipe_data)
+            elif recipe_create == "205,Regex mismatch":
+                message = "Recipe Name has special characters "
+                return render_template("recipes.html", msg=message, data=recipe_data)
+            else:
+                message = "unable to create recipe"
+                return render_template("recipes.html", msg=message, data=recipe_data)
+        return render_template("recipes.html")
+    return render_template("login.html")
+
