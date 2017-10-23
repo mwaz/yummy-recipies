@@ -235,6 +235,24 @@ def category_edit():
     return render_template("login.html")
 
 
+@app.route('/category_delete', methods=['GET', 'POST'])
+def category_delete():
+    """method to delete a recipe category """
+    if g.member:
+        if request.method == "POST":
+            recipe_name = request.form['category_name']
+            delete_result = new_cat.category_delete(recipe_name)
+            data = new_cat.view_recipe_category(g.member)
 
-
+            if delete_result == "200,OK":
+                msg = "Recipe Category Deleted"
+                return render_template("recipe-categories.html", msg=msg, data=data)
+            elif delete_result == "404,Category doesnt exist":
+                msg = "Recipe category does not exist"
+                return render_template("recipe-categories.html", msg=msg, data=data)
+            else:
+                msg = "Can't delete category"
+                return render_template("recipe-categories.html", msg=msg, data=data)
+        return render_template("recipe-categories.html")
+    return render_template("login.html")
 
