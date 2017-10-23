@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/mwaz/yummy-recipies.svg?branch=challenge_two)](https://travis-ci.org/mwaz/yummy-recipies)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/mwaz/yummy-recipies/blob/challenge_two/licence.txt)
 [![Coverage Status](https://coveralls.io/repos/github/mwaz/yummy-recipies/badge.svg?branch=challenge_two)](https://coveralls.io/github/mwaz/yummy-recipies?branch=challenge_two)
+[![Maintainability](https://api.codeclimate.com/v1/badges/52e878916d0ff93df8be/maintainability)](https://codeclimate.com/github/mwaz/yummy-recipies/maintainability)
 
 Andela Bootcamp challenge which provides a platform for users to keep track of their
 awesome recipes and share with others if they so wish.
