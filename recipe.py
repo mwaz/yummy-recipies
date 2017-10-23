@@ -30,3 +30,16 @@ class Recipe(object):
             del self.recipe_categories[cat_name]
             return "200,OK"
         return "404,Category doesnt exist"
+
+    def recipe_register(self, cat_name, recipe_name, owner):
+        """ method that defines the elements required to create an account """
+        if re.match(regex_name, cat_name):
+            if cat_name != '' and cat_name.strip():
+                if cat_name not in self.recipe_categories:
+                    self.recipes[recipe_name] = {"cat_name": cat_name, "recipe_name": recipe_name, "owner": owner}
+                    return "200,OK"
+                return "204,Recipe exists"
+            return "205,Invalid Name"
+        return "205,Regex mismatch"
+
+    
