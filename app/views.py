@@ -156,4 +156,14 @@ def category_register():
     return render_template("login.html")
 
 
+@app.route('/view_category', methods=["POST", "GET"])
+def view_category():
+    if g.member:
+
+        category_name = request.form['category_name']
+        view_cat = new_cat.view_recipe_category(category_name)
+
+        return render_template("recipes.html", message=category_name,data=view_cat)
+    return render_template("login.html")
+
 
