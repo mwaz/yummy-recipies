@@ -49,4 +49,12 @@ class Recipe(object):
             return "200,OK"
         return "404,Recipe doesnt exist"
 
+    def view_recipe_category(self,owner):
+        category_data = self.recipe_categories
+        render_category = []
+        for category in category_data:
+            if category_data[category]['owner'] == owner:
+               render_category.append(category)
+        return render_category
+
     
