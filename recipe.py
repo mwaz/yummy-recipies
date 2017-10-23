@@ -57,4 +57,10 @@ class Recipe(object):
                render_category.append(category)
         return render_category
 
-    
+    def view_recipe(self, cat_name):
+        recipe_data = self.recipes
+        render_category = []
+        for recipe in recipe_data:
+            if recipe_data[recipe]['cat_name'] == cat_name:
+                render_category.append(recipe)
+        return render_category
