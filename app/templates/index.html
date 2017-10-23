@@ -3,30 +3,30 @@
 
 <!-- Head Tag begins here -->
 <head>
-	<title>Index</title>
+    <title>Index</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <!-- Head Tag ends here -->
 
 <body>
-	<!-- Beginning of Navbar -->
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
+    <!-- Beginning of Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register"> Sign Up <span class="glyphicon glyphicon-tasks"></span></a></li>
+                <li><a href="/login"> Log in <span class="glyphicon glyphicon-log-in"></span></a></li>
+            </ul>
         </div>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register"> Sign Up <span class="glyphicon glyphicon-tasks"></span></a></li>
-            <li><a href="/login"> Log in <span class="glyphicon glyphicon-log-in"></span></a></li>
-        </ul>
+    </nav>
+    <!-- End of Navbar -->
+    <div class="container-fluid">
+        <div class="img">
+            <center><img class="img-responsive" src="{{ url_for('static', filename='images/yummy.jpg')}}" width="70%" height="70%"/></center>
+        </div>
     </div>
-</nav>
-<!-- End of Navbar -->
-<div class="container-fluid">
-	<div class="img">
-	<center><img class="img-responsive" src="{{ url_for('static', filename='images/yummy.jpg')}}" width="70%" height="70%"/></center>
-	</div>
-</div>
 </body>
 </html>
