@@ -256,3 +256,30 @@ def category_delete():
         return render_template("recipe-categories.html")
     return render_template("login.html")
 
+
+@app.route('/recipe_delete', methods=['GET', 'POST'])
+def recipe_delete():
+    """method to delete a recipe"""
+    if g.member:
+        if request.method == "POST":
+            data = request.form['categor_name']
+            recipe_name = request.form['recipe_name']
+            delete_result = new_cat.recipe_delete(recipe_name)
+            dict_data = new_cat.view_recipe(data)
+
+            if delete_result == "200,OK":
+                msg = "Recipe Deleted"
+                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+            elif delete_result == "404,Recipe doesnt exist":
+                msg = "Recipe does not exist"
+                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+            else:
+                msg = "Can't delete category"
+                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+        return render_template("recipes.html")
+    return render_template("login.html")
+
+
+
+
+
