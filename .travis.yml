@@ -7,7 +7,6 @@ script:
      - "nose2 test_users"
      - "nose2 test_recipes"
      - "coverage run test_users.py"
-     - "coverage run user.py"
      - "coverage run test_recipes.py"
 after_success: coveralls
 
