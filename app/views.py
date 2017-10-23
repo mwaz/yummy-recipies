@@ -204,3 +204,37 @@ def recipe_register():
         return render_template("recipes.html")
     return render_template("login.html")
 
+
+@app.route('/category_edit', methods=['GET', 'POST'])
+def category_edit():
+    """method to edit a recipe category """
+    if g.member:
+        if request.method == "POST":
+            recipe_name = request.form['recipe_name']
+            cat_name = request.form['category_name']
+            owner = g.member
+
+            recipe_create = new_cat.recipe_register(cat_name, recipe_name, owner)
+
+            if recipe_create == "200,OK":
+                message = "Successfully created recipe"
+                return render_template("recipes.html", success=message)
+            elif recipe_create == "204,Recipe exists":
+                message = "Recipe exists"
+                return render_template("recipes.html", msg=message)
+            elif recipe_create == "205,Invalid Name":
+                message = "Invalid Recipe Name"
+                return render_template("recipes.html", msg=message)
+            elif recipe_create == "205,Regex mismatch":
+                message = "Recipe Name has special characters "
+                return render_template("recipes.html", msg=message)
+            else:
+                message = "unable to create recipe"
+                return render_template("recipes.html", msg=message)
+        return render_template("recipes.html")
+    return render_template("login.html")
+
+
+
+
+
