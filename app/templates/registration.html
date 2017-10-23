@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag begins here -->
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<!-- Head Tag Ends here -->
+
+<body>
+    <!-- Beginning of Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/"> Home <span class="glyphicon glyphicon-home"> </span> </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"> Login <span class="glyphicon glyphicon-log-in"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <!-- beginning of class container which has the panels -->
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Yummy Recipes-User Registration 
+                </div>
+                <div class="panel-body">
+                    {% if msg %}
+                    <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                    {% endif %}
+                    <div class="right">
+                        <div class="FormBox">
+                            <form action="/register" method="POST">
+                                <p> Email </p>
+                                <input type="email" name="email" placeholder="someone@someone.com" required>
+                                <p> Username </p>
+                                <input type="text" name="username" placeholder="Someone" required>
+                                <p> Password</p>
+                                <input type="password" name="password" placeholder="*******" required>
+                                <p> Confirm Password</p>
+                                <input type="password" name="cpassword" placeholder="*******" required>
+                                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Class container -->
+</body>
+</html>
