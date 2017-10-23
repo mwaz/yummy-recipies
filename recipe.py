@@ -42,4 +42,11 @@ class Recipe(object):
             return "205,Invalid Name"
         return "205,Regex mismatch"
 
+    def recipe_delete(self,recipe_name):
+        """ method that defines the elements required to create an account """
+        if recipe_name in self.recipes.keys():
+            del self.recipes[recipe_name]
+            return "200,OK"
+        return "404,Recipe doesnt exist"
+
     
