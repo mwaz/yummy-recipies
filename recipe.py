@@ -35,7 +35,7 @@ class Recipe(object):
         """ method that defines the elements required to create an account """
         if re.match(regex_name, cat_name):
             if cat_name != '' and cat_name.strip():
-                if cat_name not in self.recipe_categories:
+                if recipe_name not in self.recipes:
                     self.recipes[recipe_name] = {"cat_name": cat_name, "recipe_name": recipe_name, "owner": owner}
                     return "200,OK"
                 return "204,Recipe exists"
