@@ -75,7 +75,13 @@ def login():
             session['user'] = member
             session['email'] = email
             message = "login successful"
-            return render_template("recipe-categories.html", success=message)
+
+            data = new_cat.view_recipe_category(session['user'])
+
+            if data != None:
+                return render_template("recipe-categories.html", success=message, data=data)
+            else:
+                return render_template("recipe-categories.html")
 
         elif result_login == "205,Password match":
             message = "Invalid login credentials"
@@ -150,9 +156,4 @@ def category_register():
     return render_template("login.html")
 
 
-@app.route('/view_category', methods=["POST", "GET"])
-def view_category():
-    if g.member:
-        category_name = request.form['category_name']
-        return render_template("recipes.html", message=category_name)
-    return render_template("login.html")
+
