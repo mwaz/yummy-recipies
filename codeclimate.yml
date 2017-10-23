@@ -1,8 +1,7 @@
-app
-Designs
-UML
-.gitignore
-.travis.yml
-config.yml
-README.md
-requirements.txt
+engines:
+  pep8:
+    enabled: true
+
+ratings:
+   paths:
+   - "**.py"
