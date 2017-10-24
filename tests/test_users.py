@@ -1,5 +1,6 @@
 import unittest
-from user import Users
+
+from models.user import Users
 
 
 class TestUsers(unittest.TestCase):
