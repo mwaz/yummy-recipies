@@ -53,13 +53,13 @@ class RecipeTest(unittest.TestCase):
 
     def test_recipe_empty_name(self):
         """ Test for empty recipe name  """
-        recipe_null = self.newCat.recipe_register(" ", "recipe1", "waweru@gmail.com")
-        self.assertIn("205,Invalid Name", recipe_null, "205,Invalid Name")
+        recipe_null = self.newCat.recipe_register("", "recipe1", "waweru@gmail.com")
+        self.assertIn("205,Regex mismatch", recipe_null, "205,Regex mismatch")
 
     def test_recipe_null_name(self):
         """ Test for null recipe name  """
-        recipe_null = self.newCat.recipe_register(' ', "recipe", "waweru@gmail.com")
-        self.assertIn("205,Invalid Name", recipe_null, "205,Invalid Name")
+        recipe_null = self.newCat.recipe_register('', "recipe", "waweru@gmail.com")
+        self.assertIn("205,Regex mismatch", recipe_null, "205,Regex mismatch")
 
     def test_recipe_exists(self):
         """ Test for method if recipe exists """
