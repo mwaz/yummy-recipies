@@ -30,13 +30,15 @@ class Recipe(object):
         """ method that defines the elements required to create an account """
         if cat_name in self.recipe_categories.keys():
             del self.recipe_categories[cat_name]
+            if cat_name in self.recipes.keys():
+                del self.recipes[cat_name:]
             return "200,OK"
         return "404,Category doesnt exist"
 
     def recipe_register(self, cat_name, recipe_name, owner):
         """ method that defines the elements required to create an account """
         if re.match(regex_name, cat_name):
-            if cat_name != '' and cat_name.strip():
+            if recipe_name != '' and recipe_name.strip():
                 if recipe_name not in self.recipes:
                     self.recipes[recipe_name] = {"cat_name": cat_name, "recipe_name": recipe_name, "owner": owner}
                     return "200,OK"
@@ -47,7 +49,7 @@ class Recipe(object):
     def recipe_delete(self, recipe_name):
         """ method that defines the elements required to create an account """
         if recipe_name in self.recipes.keys():
-            del self.recipes[recipe_name]
+            del self.recipes[0:]
             return "200,OK"
         return "404,Recipe doesnt exist"
 
@@ -61,8 +63,8 @@ class Recipe(object):
 
     def view_recipe(self, cat_name):
         recipe_data = self.recipes
-        render_category = []
+        render_recipe = []
         for recipe in recipe_data:
             if recipe_data[recipe]['cat_name'] == cat_name:
-                render_category.append(recipe)
-        return render_category
+                render_recipe.append(recipe)
+        return render_recipe
