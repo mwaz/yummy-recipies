@@ -40,7 +40,10 @@ class Recipe(object):
         if re.match(regex_name, cat_name):
             if recipe_name != '' and recipe_name.strip():
                 if recipe_name not in self.recipes:
-                    self.recipes[recipe_name] = {"cat_name": cat_name, "recipe_name": recipe_name, "owner": owner}
+                    self.recipes[recipe_name] = \
+                        {"cat_name": cat_name,
+                         "recipe_name": recipe_name,
+                         "owner": owner}
                     return "200,OK"
                 return "204,Recipe exists"
             return "205,Invalid Name"
