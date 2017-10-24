@@ -1,5 +1,7 @@
 # yummy-recipes
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/361f8c2f72e04e3c8a4fa6c18c84eb51)](https://www.codacy.com/app/mwaz/yummy-recipies?utm_source=github.com&utm_medium=referral&utm_content=mwaz/yummy-recipies&utm_campaign=badger)
+
 Andela Bootcamp challenge which provides a platform for users to keep track of their
 awesome recipes and share with others if they so wish.
 
