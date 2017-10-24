@@ -31,7 +31,7 @@ class Recipe(object):
         if cat_name in self.recipe_categories.keys():
             del self.recipe_categories[cat_name]
             if cat_name in self.recipes.keys():
-                del self.recipes[cat_name:]
+                del self.recipes[cat_name]
             return "200,OK"
         return "404,Category doesnt exist"
 
@@ -49,7 +49,7 @@ class Recipe(object):
     def recipe_delete(self, recipe_name):
         """ method that defines the elements required to create an account """
         if recipe_name in self.recipes.keys():
-            del self.recipes[0:]
+            del self.recipes[recipe_name]
             return "200,OK"
         return "404,Recipe doesnt exist"
 
