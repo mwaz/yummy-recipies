@@ -1,9 +1,7 @@
 import os
 from flask import render_template, request, session, g, Flask, url_for
 from models.user import Users
-
 from models.recipe import Recipe
-
 app = Flask(__name__)
 from app import app
 
@@ -79,8 +77,8 @@ def login():
             message = "login successful"
 
             data = new_cat.view_recipe_category(session['user'])
-            print (data)
-            if data != None:
+            print(data)
+            if data is not None:
                 return render_template("recipe-categories.html", success=message, data=data)
             else:
                 return render_template("recipe-categories.html")
@@ -165,9 +163,8 @@ def view_category():
         view_cat = new_cat.view_recipe_category(category_name)
         print(view_cat)
 
-        return render_template("recipes.html", message=category_name,data=view_cat)
+        return render_template("recipes.html", message=category_name, data=view_cat)
     return render_template("login.html")
-
 
 
 @app.route('/recipe_register', methods=['GET', 'POST'])
@@ -186,11 +183,11 @@ def recipe_register():
             render_recipe = []
             for recipe in recipe_data:
                 if recipe_data[recipe]['cat_name'] == cat_name:
-                     render_recipe.append(recipe)
+                    render_recipe.append(recipe)
 
             if recipe_create == "200,OK":
                 message = "Successfully created recipe"
-                return render_template("recipes.html", success=message, data=render_recipe, message = category_name)
+                return render_template("recipes.html", success=message, data=render_recipe, message=category_name)
             elif recipe_create == "204,Recipe exists":
                 message = "Recipe exists"
                 return render_template("recipes.html", msg=message, data=recipe_data)
@@ -279,8 +276,3 @@ def recipe_delete():
                 return render_template("recipes.html", msg=msg, message=data, recipes=recipe_data)
         return render_template("recipes.html")
     return render_template("login.html")
-
-
-
-
-

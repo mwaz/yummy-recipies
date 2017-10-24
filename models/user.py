@@ -5,6 +5,7 @@ regex_member = "[a-zA-Z0-9- .]+$"
 regEmail = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
 regPassword = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
 
+
 class Users(object):
     """
       Users Class to handle  user functions like login and signup
@@ -24,7 +25,7 @@ class Users(object):
                         if password == cpassasword:
                             if re.search(regEmail, email):
                                 if re.search(regPassword, password):
-                                    users[email] = {'member': member,'email': email,'password': password,}
+                                    users[email] = {'member': member, 'email': email, 'password': password}
                                     return "200,OK"
                                 return "205,Password Regex mismatch"
                             return "205,Email Regex mismatch"
@@ -47,7 +48,6 @@ class Users(object):
                 return "404,User not found"
             return "205,Invalid input"
         return "205,Empty input"
-
 
     def get_member(self, email):
         if email in users.keys():

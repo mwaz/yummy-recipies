@@ -1,5 +1,7 @@
 import re
 regex_name = "[a-zA-Z0-9- .]+$"
+
+
 class Recipe(object):
     """
       Users Class to handle methods to do with recipes categories and actual recipes
@@ -17,8 +19,8 @@ class Recipe(object):
         """ method that defines the elements required to create an account """
         if re.match(regex_name, cat_name):
             if cat_name != '' and cat_name.strip():
-                if cat_name not in self.recipe_categories :
-                    self.recipe_categories[cat_name] = {"cat_name":cat_name, "owner":owner,}
+                if cat_name not in self.recipe_categories:
+                    self.recipe_categories[cat_name] = {"cat_name": cat_name, "owner": owner}
                     return "200,OK"
                 return "204,Category exists"
             return "205,Invalid Name"
@@ -26,7 +28,7 @@ class Recipe(object):
 
     def category_delete(self, cat_name):
         """ method that defines the elements required to create an account """
-        if cat_name in self.recipe_categories.keys() :
+        if cat_name in self.recipe_categories.keys():
             del self.recipe_categories[cat_name]
             return "200,OK"
         return "404,Category doesnt exist"
@@ -42,19 +44,19 @@ class Recipe(object):
             return "205,Invalid Name"
         return "205,Regex mismatch"
 
-    def recipe_delete(self,recipe_name):
+    def recipe_delete(self, recipe_name):
         """ method that defines the elements required to create an account """
         if recipe_name in self.recipes.keys():
             del self.recipes[recipe_name]
             return "200,OK"
         return "404,Recipe doesnt exist"
 
-    def view_recipe_category(self,owner):
+    def view_recipe_category(self, owner):
         category_data = self.recipe_categories
         render_category = []
         for category in category_data:
             if category_data[category]['owner'] == owner:
-               render_category.append(category)
+                render_category.append(category)
         return render_category
 
     def view_recipe(self, cat_name):
