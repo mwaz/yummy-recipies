@@ -1,7 +1,9 @@
 import os
-from user import Users
-from recipe import Recipe
 from flask import render_template, request, session, g, Flask, url_for
+from models.user import Users
+
+from models.recipe import Recipe
+
 app = Flask(__name__)
 from app import app
 
@@ -77,7 +79,7 @@ def login():
             message = "login successful"
 
             data = new_cat.view_recipe_category(session['user'])
-
+            print (data)
             if data != None:
                 return render_template("recipe-categories.html", success=message, data=data)
             else:
@@ -121,7 +123,6 @@ def category_register():
             cat_name = request.form['category_name']
             owner = g.member
             category_create = new_cat.category_register(cat_name, owner)
-
             category_data = new_cat.recipe_categories
             render_category = []
             for category in category_data:
@@ -162,6 +163,7 @@ def view_category():
 
         category_name = request.form['category_name']
         view_cat = new_cat.view_recipe_category(category_name)
+        print(view_cat)
 
         return render_template("recipes.html", message=category_name,data=view_cat)
     return render_template("login.html")
@@ -243,7 +245,6 @@ def category_delete():
             recipe_name = request.form['category_name']
             delete_result = new_cat.category_delete(recipe_name)
             data = new_cat.view_recipe_category(g.member)
-
             if delete_result == "200,OK":
                 msg = "Recipe Category Deleted"
                 return render_template("recipe-categories.html", msg=msg, data=data)
@@ -265,17 +266,17 @@ def recipe_delete():
             data = request.form['categor_name']
             recipe_name = request.form['recipe_name']
             delete_result = new_cat.recipe_delete(recipe_name)
-            dict_data = new_cat.view_recipe(data)
+            recipe_data = new_cat.view_recipe(data)
 
             if delete_result == "200,OK":
                 msg = "Recipe Deleted"
-                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+                return render_template("recipes.html", msg=msg, message=data, recipes=recipe_data)
             elif delete_result == "404,Recipe doesnt exist":
                 msg = "Recipe does not exist"
-                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+                return render_template("recipes.html", msg=msg, message=data, recipes=recipe_data)
             else:
                 msg = "Can't delete category"
-                return render_template("recipes.html", msg=msg, message=data, dict_data=dict_data)
+                return render_template("recipes.html", msg=msg, message=data, recipes=recipe_data)
         return render_template("recipes.html")
     return render_template("login.html")
 
