@@ -26,12 +26,19 @@ class Recipe(object):
             return "205,Invalid Name"
         return "205,Regex mismatch"
 
-    def category_delete(self, cat_name):
+    def category_delete(self, cat_name, owner):
         """ method that defines the elements required to create an account """
         if cat_name in self.recipe_categories.keys():
-            del self.recipe_categories[cat_name]
-            if cat_name in self.recipes.keys():
-                del self.recipes[cat_name]
+            for recipe in self.recipes:
+                if self.recipes[recipe]['owner'] == owner:
+                    if self.recipes[recipe]['recipe_name'] != None:
+                        del self.recipes[recipe]['recipe_name']
+                        print("deleted recipes")
+                        del self.recipe_categories[cat_name]
+                        return "okay"
+                    print("no recipes")
+                    del self.recipe_categories[cat_name]
+
             return "200,OK"
         return "404,Category doesnt exist"
 
@@ -71,3 +78,5 @@ class Recipe(object):
             if recipe_data[recipe]['cat_name'] == cat_name:
                 render_recipe.append(recipe)
         return render_recipe
+
+    
