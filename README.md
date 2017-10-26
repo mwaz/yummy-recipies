@@ -13,7 +13,7 @@ The application contains the user interfaces for the yummy-recipies,
 
 UML diagrams for the Project
 
-The falsk application for yummy-recipies
+The flask application for yummy-recipies
 
 # Prerequisites
 
