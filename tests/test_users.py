@@ -14,10 +14,17 @@ class TestUsers(unittest.TestCase):
     def test_member_register(self):
         """ Test to test function member_register """
         self.newUser.users = {}
-        #users dictionary to check whether the user already exists
         self.newUser.member_register("waweru@gmail.com", "mwaz", "password", "password")
-        result = self.newUser.member_register("waweru@gmail.com", "mwaz", "password", "password")
+        result = self.newUser.member_register("waweruh@gmail.com", "mwaz", "password", "password")
         self.assertIn("205,Password Regex mismatch", result, "205,Password Regex mismatch")
+
+    def test_member_register_success(self):
+        """ Test to test function member_register """
+        self.newUser.users = {}
+        self.newUser.member_register("waweru@gmail.com", "mwaz", "password", "password")
+        result = self.newUser.member_register("waweruh@gmail.com", "mwazz", "password6", "password6")
+        self.assertIn("200,OK", result, "200,OK")
+
 
     def test_null_email_field(self):
         """Test to check if email is null"""
@@ -59,19 +66,27 @@ class TestUsers(unittest.TestCase):
         member_registration = self.newUser.member_register("waweru@gmail.com", "&#*", "password", "password")
         self.assertIn("205,Regex mismatch", member_registration, "205,Regex mismatch")
 
-    def test_success_login(self):
+
+    def test_existing_member_email(self):
+        """ Test to check if email exists"""
+        self.newUser.users = {}
+        self.newUser.member_register("waweru@gmail.com", "mwaz", "password2", "password2")
+        result = self.newUser.member_register("waweru@gmail.com", "mwaz", "password2", "password2")
+        self.assertIn("401,Email exists", result, "401,Email exists")
+
+    def test_invalid_login_credentials(self):
         """ method to test a successful login """
         self.newUser.users = {}
         self.newUser.member_register('waweru@gmail.com', 'mwaz', 'pass', 'pass')
-        result = self.newUser.user_login('waweru@gmail.com', 'pass')
+        result = self.newUser.user_login('waweruh@gmail.com', 'ppass')
         self.assertIn("404,User not found", result, "404,User not found")
 
     def test_wrong_pass_login(self):
         """method to test whether registration password is equal to login password"""
         self.newUser.users = {}
-        self.newUser.member_register('waweru@gmail.com', 'mwaz', 'pass', 'pass')
+        self.newUser.user_login('waweru@gmail.com','pass')
         result = self.newUser.user_login('waweru@gmail.com', 'pass123')
-        self.assertIn("404,User not found", result, "404,User not found")
+        self.assertIn("205,Password mismatch", result, "205,Password mismatch")
 
     def test_wrong_email_login(self):
         """ method to test if the email used for login is wrong"""
@@ -96,9 +111,25 @@ class TestUsers(unittest.TestCase):
         self.assertIn("205,Invalid input", result, "205,Invalid input")
 
     def test_empty_email(self):
+        """Test to check empty email"""
         result = self.newUser.user_login(' ', 'pass')
         self.assertIn("205,Empty input", result, "205,Empty input")
 
     def test_empty_password(self):
+        """Test to check empty password"""
         result = self.newUser.user_login('waweru@gmail.com', ' ')
         self.assertIn("205,Empty input", result, "205,Empty input")
+
+    def test_member_email_fetch(self):
+        """Test to check if get_email method returns the correct email"""
+        self.newUser.users = {}
+        member = "mwaz@gmail.com"
+        result = self.newUser.get_email(member)
+        self.assertNotEqual(result, member)
+
+    def test_member_name_fetch(self):
+        """Test to check member name in registered members"""
+        self.newUser.users = {}
+        member = "mwaz@gmail.com"
+        result = self.newUser.get_member(member)
+        self.assertNotEqual(result, member)
