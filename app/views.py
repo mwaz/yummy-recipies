@@ -45,6 +45,7 @@ def register():
 
         elif result == "401,Member exists":
             msg_output = "member name already taken"
+            return render_template("registration.html", msg=msg_output)
 
             return render_template("registration.html", msg=msg_output)
         elif result == "400,Passwords dont match":
@@ -175,7 +176,7 @@ def recipe_register():
             owner = g.member
             recipe_create = new_cat.recipe_register(cat_name, recipe_name, owner)
             render_category = new_cat.view_recipe(cat_name)
-
+            print(render_category)
             if recipe_create == "200,OK":
                 message = "Successfully created recipe"
                 return render_template("recipes.html", success=message, data=render_category, message=cat_name)
@@ -231,7 +232,7 @@ def category_delete():
     if g.member:
         if request.method == "POST":
             category_name = request.form['category_name']
-            delete_result = new_cat.category_delete(category_name)
+            delete_result = new_cat.category_delete(category_name,g.member)
             data = new_cat.view_recipe_category(g.member)
             if delete_result == "200,OK":
                 msg = "Recipe Category Deleted"
