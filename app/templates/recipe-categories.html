@@ -116,13 +116,13 @@
                         {% for recipe_categories in data %}
 
                         <tr>
-                            <td> {{ recipe_categories }}  </td>
+                            <td> {{ recipe_categories[0] }}  </td>
 
 
                             <td>
                                 <form action="/view_category" method="POST">
 
-                                    <input type="hidden" name="category_name" value=" {{ recipe_categories }} " hidden>
+                                    <input type="hidden" name="category_name" value=" {{ recipe_categories[0] }} " hidden>
                                     <button type="submit" class="btn-unknown"> View Recipes </button>
                                 </form>
 
@@ -142,20 +142,22 @@
                                         <span class="sr-only">Close</span>
                                     </button>
                                     <h4 class="modal-title" >
-                                        Update Recipe Category
+                                        Update {{ recipe_categories[0] }} Category
                                     </h4>
                                 </div>
 
                                 <!-- Modal Body -->
                                 <div class="modal-body">
 
-                                    <form role="form" action="#" method="POST">
+                                    <form role="form" action="/category_edit" method="POST">
 
                                         <div class="form-group">
                                             <center><label for="category_name">Category Name </label></center>
                                             <input type="text" class="form-control"
-                                             placeholder="category name" name="category_name"/>
-                                        </div>
+                                             placeholder="category name" name="cat_name"/>
+
+                                            <input type="hidden" class="form-control" value="{{ recipe_categories[0] }}"
+                                            placeholder="category name" name="category_name"/>
 
                                         <!-- Modal Footer -->
                                         <div class="modal-footer">
@@ -166,6 +168,7 @@
                                         <button type="submit" class="btn btn-primary">Edit Category
                                         </button>
                                     </div>
+                                  </div>
                                 </form>
                             </div>
                         </div>
@@ -178,7 +181,7 @@
                             <td>
                                 <form action="/category_delete" method="POST">
 
-                                <input type="hidden" class="form-control" value="{{ recipe_categories }}"
+                                <input type="hidden" class="form-control" value="{{ recipe_categories[0] }}"
                                             placeholder="category name" name="category_name"/>
                                     <button type="submit" role="button"> Delete </button>
                               </form>
