@@ -137,15 +137,8 @@ def category_register():
                 message = "unable to create category"
                 return render_template("recipe-categories.html", msg=message, data=category_data)
         else:
-            category_data = new_cat.recipe_categories
-            render_category = []
-            for category in category_data:
-                if category_data[category]['owner'] == g.member:
-                    render_category.append(category)
-                    if render_category == []:
-                        url_for('/recipe-categories')
+            category_data = new_cat.view_recipe_category(g.member)
             return render_template("recipe-categories.html", data=category_data)
-
     return render_template("login.html")
 
 
@@ -154,7 +147,7 @@ def view_category():
     if g.member:
 
         category_name = request.form['category_name']
-        view_cat = new_cat.view_recipe(category_name)
+        view_cat = new_cat.view_recipe(category_name, g.member)
         return render_template("recipes.html", message=category_name, data=view_cat)
     return render_template("login.html")
 
@@ -168,7 +161,7 @@ def recipe_register():
             cat_name = request.form['category_name']
             owner = g.member
             recipe_create = new_cat.recipe_register(cat_name, recipe_name, owner)
-            render_category = new_cat.view_recipe(cat_name)
+            render_category = new_cat.view_recipe(cat_name, g.member)
             if recipe_create == "200,OK":
                 message = "Successfully created recipe"
                 return render_template("recipes.html", success=message, data=render_category, message=cat_name)
@@ -195,21 +188,29 @@ def category_edit():
         if request.method == "POST":
             cat_name = request.form['category_name']
             new_cat_name = request.form['cat_name']
-            owner = g.member
-
-            if cat_name in new_cat.recipe_categories.keys():
-                del new_cat.recipe_categories[cat_name]
-                recipe_edit = new_cat.category_register(new_cat_name, owner)
-                data = new_cat.view_recipe_category(g.member)
-
+            recipe_edit = new_cat.category_edit(cat_name, new_cat_name, g.member)
+            data = new_cat.view_recipe_category(g.member)
 
             # recipe_edit = new_cat.recipe_register(new_cat_name, owner)
 
             if recipe_edit == "200,OK":
                 message = "Successfully edited category"
                 return render_template("recipe-categories.html", success=message, data=data)
-            elif recipe_edit == "404,Category doesnt exist":
-                message = "Category does not exist"
+
+            elif recipe_edit == "204,Category exists":
+                message = "Can't edit category! Category Name Exists"
+                return render_template("recipe-categories.html", msg=message, data=data)
+
+            elif recipe_edit == "205,Invalid Name":
+                message = "Invalid category name"
+                return render_template("recipe-categories.html", msg=message, data=data)
+
+            elif recipe_edit == "205,Regex mismatch":
+                message = "Regex mismatch"
+                return render_template("recipe-categories.html", msg=message, data=data)
+
+            elif recipe_edit == "404,Cant Edit Category":
+                message = "Cannot Edit Category"
                 return render_template("recipe-categories.html", msg=message, data=data)
             else:
                 message = "unable to edit recipe category"
@@ -224,7 +225,7 @@ def category_delete():
     if g.member:
         if request.method == "POST":
             category_name = request.form['category_name']
-            delete_result = new_cat.category_delete(category_name)
+            delete_result = new_cat.category_delete(category_name, g.member)
             data = new_cat.view_recipe_category(g.member)
 
             if delete_result == "200,OK":
@@ -247,11 +248,11 @@ def recipe_delete():
         if request.method == "POST":
             data = request.form['categor_name']
             recipe_name = request.form['recipe_name']
-            delete_result = new_cat.recipe_delete(recipe_name)
-            recipe_data = new_cat.view_recipe(data)
+            delete_result = new_cat.recipe_delete(recipe_name, data, g.member)
+            recipe_data = new_cat.view_recipe(data, g.member)
+
             if delete_result == "200,OK":
                 msg = "Recipe Deleted"
-
                 return render_template("recipes.html", msg=msg, message=data, data=recipe_data)
             elif delete_result == "404,Recipe doesnt exist":
                 msg = "Recipe does not exist"
