@@ -115,7 +115,7 @@
                     <tr> <br> </tr>
                     {% for recipe in data %}
                         <tr>
-                            <td>{{ recipe }}</td>
+                            <td>{{ recipe[1] }}</td>
 
                             <td> <a href="#modalForm3" data-toggle="modal"> Update </a>
                         <div class="modal fade" id="modalForm3" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
@@ -163,7 +163,7 @@
  </td>
                             <td>
                                 <form action="/recipe_delete" method="POST">
-                                <input type="hidden" class="form-control" value="{{ recipe }}"
+                                <input type="hidden" class="form-control" value="{{ recipe[1] }}"
                                             placeholder="recipe name" name="recipe_name"/>
                                     <input type="hidden" class="form-control" value="{{ message }}"
                                             placeholder="recipe name" name="categor_name"/>
