@@ -1,7 +1,6 @@
 [![Build Status](https://travis-ci.org/mwaz/yummy-recipies.svg?branch=challenge_two)](https://travis-ci.org/mwaz/yummy-recipies)
 [![Coverage Status](https://coveralls.io/repos/github/mwaz/yummy-recipies/badge.svg?branch=develop)](https://coveralls.io/github/mwaz/yummy-recipies?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/52e878916d0ff93df8be/maintainability)](https://codeclimate.com/github/mwaz/yummy-recipies/maintainability)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/361f8c2f72e04e3c8a4fa6c18c84eb51)](https://www.codacy.com/app/mwaz/yummy-recipies?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mwaz/yummy-recipies&amp;utm_campaign=Badge_Grade)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/mwaz/yummy-recipies/blob/challenge_two/licence.txt)
 
 Andela Bootcamp challenge which provides a platform for users to keep track of their
