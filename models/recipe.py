@@ -20,7 +20,8 @@ class Recipe(object):
         if re.match(regex_name, cat_name):
             if cat_name != '' and cat_name.strip():
                 if self.recipe_categories != []:
-                    if (any(cat_name == x[0] for x in self.recipe_categories)) != True:
+                    if (any(cat_name == category_list[0] and owner == category_list[1]
+                            for category_list in self.recipe_categories)) != True:
                         self.recipe_categories.append([cat_name, owner,])
                         return "200,OK"
                     return "204,Category exists"
