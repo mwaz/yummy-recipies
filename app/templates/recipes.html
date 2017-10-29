@@ -138,7 +138,7 @@
                                 <!-- Modal Body -->
                                 <div class="modal-body">
 
-                                    <form role="form" action="/recipe_edit" method="POST">
+                                    <form role="form" action="/recipe_edit/{{message}}" method="POST">
 
                                         <div class="form-group">
                                             <center><label for="recipe_name">Recipe Name </label></center>
@@ -148,8 +148,6 @@
                                              <input type="hidden" class="form-control"
                                              placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
 
-                                             <input type="hidden" class="form-control"
-                                             placeholder="category Name" name="cat_name" value="{{ message }} "/>
 
                                         </div>
 
