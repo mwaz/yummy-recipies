@@ -39,6 +39,9 @@ class Recipe(object):
                         if (any(new_cat_name == category_list[0]
                                 for category_list in self.recipe_categories)) != True:
                             category_list[0] = new_cat_name
+                            for recipe_list in self.recipes:
+                                recipe_index = self.recipes.index(recipe_list)
+                                self.recipes[recipe_index][0] = new_cat_name
 
                             return "200,OK"
                         return "204,Category exists"
