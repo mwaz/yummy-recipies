@@ -120,7 +120,7 @@
 
 
                             <td>
-                                <form action="/view_category" method="POST">
+                                <form action="/view_category/{{recipe_categories[0]}}" method="POST">
 
                                     <input type="hidden" name="category_name" value=" {{ recipe_categories[0] }} " hidden>
                                     <button type="submit" class="btn-unknown" > View Recipes </button>
