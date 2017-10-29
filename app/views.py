@@ -47,7 +47,6 @@ def register():
             msg_output = "member name already taken"
             return render_template("registration.html", msg=msg_output)
 
-            return render_template("registration.html", msg=msg_output)
         elif result == "400,Passwords dont match":
             msg_output = "Passwords dont match"
             return render_template("registration.html", msg=msg_output)
@@ -145,7 +144,6 @@ def category_register():
 @app.route('/view_category', methods=["POST", "GET"])
 def view_category():
     if g.member:
-
         category_name = request.form['category_name']
         view_cat = new_cat.view_recipe(category_name, g.member)
         return render_template("recipes.html", message=category_name, data=view_cat)
@@ -258,7 +256,47 @@ def recipe_delete():
                 msg = "Recipe does not exist"
                 return render_template("recipes.html", msg=msg, message=data, data=recipe_data)
             else:
-                msg = "Can't delete category"
+                msg = "Can't delete recipe"
                 return render_template("recipes.html", msg=msg, message=data, data=recipe_data)
         return render_template("recipes.html")
     return render_template("login.html")
+
+
+@app.route('/recipe_edit', methods=['GET', 'POST'])
+def recipe_edit():
+    """method to edit a recipe """
+    if g.member:
+        if request.method == "POST" or request.method == "GET":
+            cat_name = request.form['cat_name']
+            new_recipe_name = request.form['new_recipe_name']
+            owner = g.member
+            edit_recipe = new_cat.recipe_edit(new_recipe_name, cat_name, owner)
+            data = new_cat.view_recipe(cat_name,owner)
+
+            if edit_recipe == "200,OK":
+                message = "Successfully edited recipe"
+                return render_template("recipes.html",  message=cat_name, success=message, data=data)
+
+            elif edit_recipe == "204,Recipe exists":
+                error = "Can't edit Recipe! Recipe Name Exists"
+                return render_template("recipes.html", message=cat_name, msg=error, data=data)
+
+            elif edit_recipe == "205,Invalid Name":
+                error = "Invalid Recipe name"
+                return render_template("recipes.html", message=cat_name, msg=error, data=data)
+
+            elif edit_recipe == "205,Regex mismatch":
+                error = "Regex mismatch"
+                return render_template("recipes.html", message=cat_name, msg=error, data=data)
+
+            elif edit_recipe == "401,Process error":
+                error = "Cannot Edit Recipe, Invalid token"
+                return render_template("recipes.html", message=cat_name, msg=error, data=data)
+            else:
+                error = "unable to edit recipe "
+                return render_template("recipes.html", message=cat_name, msg=error, data=data)
+        return render_template("recipes.html")
+    return render_template("login.html")
+
+
+
