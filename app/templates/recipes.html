@@ -117,8 +117,9 @@
                         <tr>
                             <td>{{ recipe[1] }}</td>
 
-                            <td> <a href="#modalForm3" data-toggle="modal"> Update </a>
-                        <div class="modal fade" id="modalForm3" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                            <td> <a href="#modalForm3{{ recipe[1] }}" data-toggle="modal"> Update </a>
+
+                        <div class="modal fade" id="modalForm3{{ recipe[1] }}" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <!-- Content of modal-->
                                 <div class="modal-content">
@@ -137,12 +138,19 @@
                                 <!-- Modal Body -->
                                 <div class="modal-body">
 
-                                    <form role="form" action="#" method="POST">
+                                    <form role="form" action="/recipe_edit" method="POST">
 
                                         <div class="form-group">
                                             <center><label for="recipe_name">Recipe Name </label></center>
                                             <input type="text" class="form-control"
-                                             placeholder="recipe Name" name="recipe_name"/>
+                                             placeholder="recipe Name" name="new_recipe_name"/>
+
+                                             <input type="hidden" class="form-control"
+                                             placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
+
+                                             <input type="hidden" class="form-control"
+                                             placeholder="category Name" name="cat_name" value="{{ message }} "/>
+
                                         </div>
 
                                         <!-- Modal Footer -->
