@@ -123,14 +123,14 @@
                                 <form action="/view_category" method="POST">
 
                                     <input type="hidden" name="category_name" value=" {{ recipe_categories[0] }} " hidden>
-                                    <button type="submit" class="btn-unknown"> View Recipes </button>
+                                    <button type="submit" class="btn-unknown" > View Recipes </button>
                                 </form>
 
                             </td>
 
 
-                            <td> <a href="#modalForm2" data-toggle="modal"> Update </a>
-                        <div class="modal fade" id="modalForm2" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                            <td> <a href="#modalForm2{{ recipe_categories[0] }}" data-toggle="modal"> Update </a>
+                        <div class="modal fade" id="modalForm2{{ recipe_categories[0] }}" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
                             <div class="modal-dialog">
                                 <!-- Content of modal-->
                                 <div class="modal-content">
@@ -183,7 +183,7 @@
 
                                 <input type="hidden" class="form-control" value="{{ recipe_categories[0] }}"
                                             placeholder="category name" name="category_name"/>
-                                    <button type="submit" role="button"> Delete </button>
+                                    <button type="submit" role="button" id="{{ recipe_categories[0] }}"> Delete </button>
                               </form>
                             </td>
                         </tr>
