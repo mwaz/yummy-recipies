@@ -141,10 +141,10 @@ def category_register():
     return render_template("login.html")
 
 
-@app.route('/view_category', methods=["POST", "GET"])
-def view_category():
+@app.route('/view_category/<category_name>', methods=["POST", "GET"])
+def view_category(category_name):
     if g.member:
-        category_name = request.form['category_name']
+        category_name = category_name
         view_cat = new_cat.view_recipe(category_name, g.member)
         return render_template("recipes.html", message=category_name, data=view_cat)
     return render_template("login.html")
@@ -262,16 +262,16 @@ def recipe_delete():
     return render_template("login.html")
 
 
-@app.route('/recipe_edit', methods=['GET', 'POST'])
-def recipe_edit():
+@app.route('/recipe_edit/<category_name>', methods=['GET', 'POST'])
+def recipe_edit(category_name):
     """method to edit a recipe """
     if g.member:
-        if request.method == "POST" or request.method == "GET":
-            cat_name = request.form['cat_name']
+        cat_name = category_name
+        owner = g.member
+        data = new_cat.view_recipe(cat_name, owner)
+        if request.method == "POST":
             new_recipe_name = request.form['new_recipe_name']
-            owner = g.member
             edit_recipe = new_cat.recipe_edit(new_recipe_name, cat_name, owner)
-            data = new_cat.view_recipe(cat_name,owner)
 
             if edit_recipe == "200,OK":
                 message = "Successfully edited recipe"
@@ -295,7 +295,8 @@ def recipe_edit():
             else:
                 error = "unable to edit recipe "
                 return render_template("recipes.html", message=cat_name, msg=error, data=data)
-        return render_template("recipes.html")
+
+        return render_template("recipes.html", message=cat_name, data=data)
     return render_template("login.html")
 
 
