@@ -22,10 +22,10 @@ class Recipe(object):
                 if self.recipe_categories != []:
                     if (any(cat_name == category_list[0] and owner == category_list[1]
                             for category_list in self.recipe_categories)) != True:
-                        self.recipe_categories.append([cat_name, owner,])
+                        self.recipe_categories.append([cat_name.replace(" ", "_"), owner,])
                         return "200,OK"
                     return "204,Category exists"
-                self.recipe_categories.append([cat_name, owner, ])
+                self.recipe_categories.append([cat_name.replace(" ", "_"), owner, ])
                 return "200,OK"
             return "205,Invalid Name"
         return "205,Regex mismatch"
@@ -38,10 +38,11 @@ class Recipe(object):
                     if category_list[0] == cat_name and category_list[1] == owner:
                         if (any(new_cat_name == category_list[0]
                                 for category_list in self.recipe_categories)) != True:
-                            category_list[0] = new_cat_name
+                            category_list[0] = new_cat_name.replace(" ", "_")
+
                             for recipe_list in self.recipes:
                                 recipe_index = self.recipes.index(recipe_list)
-                                self.recipes[recipe_index][0] = new_cat_name
+                                self.recipes[recipe_index][0] = new_cat_name.replace(" ", "_")
 
                             return "200,OK"
                         return "204,Category exists"
@@ -60,16 +61,16 @@ class Recipe(object):
 
     def recipe_register(self, cat_name, recipe_name, owner):
         """ method that defines the elements required to create an account """
-        if re.match(regex_name, cat_name):
-            if recipe_name != '' and recipe_name.strip():
+        if re.match(regex_name, recipe_name):
+            if recipe_name != '':
                 if self.recipes != []:
                     if (any(recipe_name == recipe_list[1] and owner == recipe_list[2]
                             and cat_name == recipe_list[0]
                             for recipe_list in self.recipes)) != True:
-                        self.recipes.append([cat_name, recipe_name, owner, ])
+                        self.recipes.append([cat_name, recipe_name.replace(" ", "_"), owner, ])
                         return "200,OK"
                     return "204,Recipe exists"
-                self.recipes.append([cat_name, recipe_name, owner])
+                self.recipes.append([cat_name, recipe_name.replace(" ", "_"), owner])
                 return "200,OK"
             return "205,Invalid Name"
         return "205,Regex mismatch"
@@ -82,7 +83,7 @@ class Recipe(object):
                     recipe_index = self.recipes.index(recipe_list)
                     if (any(new_recipe_name == recipe_list[1]
                             for recipe_list in self.recipes)) != True:
-                        self.recipes[recipe_index][1] = new_recipe_name
+                        self.recipes[recipe_index][1] = new_recipe_name.replace(" ", "_")
                         return "200,OK"
                     return "204,Recipe exists"
             return "205,Regex mismatch"
