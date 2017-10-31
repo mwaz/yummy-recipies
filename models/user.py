@@ -3,7 +3,7 @@ import re
 users = {}
 regex_member = "[a-zA-Z0-9- .]+$"
 regEmail = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
-regPassword = r"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+
 
 
 class Users(object):
@@ -17,14 +17,16 @@ class Users(object):
         self.password = password
 
     def member_register(self, email, member, password, cpassasword):
-        """ method that defines the elements required to create an account """
+        """ method that defines the elements required
+         to create a member account
+          """
         if re.match(regex_member, member):
             if member != '' and email != '' and password != '' and cpassasword != '' and cpassasword != ' ':
                 if member not in users.keys():
                     if email not in users.keys():
                         if password == cpassasword:
                             if re.search(regEmail, email):
-                                if re.search(regPassword, password):
+                                if len(password) >= 8:
                                     users[email] = {'member': member, 'email': email, 'password': password}
                                     return "200,OK"
                                 return "205,Password Regex mismatch"
@@ -35,19 +37,6 @@ class Users(object):
             return "205,Invalid input"
         return "205,Regex mismatch"
 
-    def user_login(self, email, password):
-        """Method to login user"""
-        if email != ' ' and password != ' ':
-            if email != '' and password != '':
-                if email in users.keys():
-                    result = users[email]
-                    passwd = result['password']
-                    if passwd == password:
-                        return "200,OK"
-                    return "205,Password mismatch"
-                return "404,User not found"
-            return "205,Invalid input"
-        return "205,Empty input"
 
     def get_member(self, email):
         if email in users.keys():
@@ -60,3 +49,17 @@ class Users(object):
             result_email = users[email]
             return result_email['email']
         return False
+
+    def user_login(self, email, password):
+        """Method to login member"""
+        if email != ' ' and password != ' ':
+            if email != '' and password != '':
+                if email in users.keys():
+                    result = users[email]
+                    passwd = result['password']
+                    if passwd == password:
+                        return "200,OK"
+                    return "205,Password mismatch"
+                return "404,User not found"
+            return "205,Invalid input"
+        return "205,Empty input"
