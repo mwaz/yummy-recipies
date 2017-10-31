@@ -1,15 +1,16 @@
 import os
-from flask import render_template, request, session, g, Flask, url_for
+from flask import render_template, request, session, g, Flask
 from models.user import Users
 from models.recipe import Recipe
 app = Flask(__name__)
 from app import app
 
-new_user = Users()
-new_cat = Recipe()
+app.secret_key = os.urandom(24) #needed to keep the client sessions secure
 
-"""Objects Instatiation"""
-app.secret_key = os.urandom(24)
+new_user = Users() #instance of class Users
+new_cat = Recipe() #instance of class Recipe
+
+
 
 
 @app.route('/')
@@ -40,7 +41,7 @@ def register():
             return render_template("registration.html", msg=msg_output)
 
         elif result == "205,Password Regex mismatch":
-            msg_output = "Password should have atleat 8 characters with at least a letter and a number"
+            msg_output = "Password should have atleat 8 characters with at least a letter and a number and a special character"
             return render_template("registration.html", msg=msg_output)
 
         elif result == "401,Member exists":
@@ -106,11 +107,7 @@ def before_request():
         g.member = session['user']
 
 
-@app.route('/logout')
-def logout():
-    """ method to logout a user"""
-    session.pop('user', None)
-    return render_template("login.html")
+
 
 
 @app.route('/cat_register', methods=['GET', 'POST'])
@@ -179,12 +176,12 @@ def recipe_register():
     return render_template("login.html")
 
 
-@app.route('/category_edit', methods=['GET', 'POST'])
-def category_edit():
+@app.route('/category_edit/<category_name>', methods=['GET', 'POST'])
+def category_edit(category_name):
     """method to edit a recipe category """
     if g.member:
         if request.method == "POST":
-            cat_name = request.form['category_name']
+            cat_name = category_name
             new_cat_name = request.form['cat_name']
             recipe_edit = new_cat.category_edit(cat_name, new_cat_name, g.member)
             data = new_cat.view_recipe_category(g.member)
@@ -299,5 +296,8 @@ def recipe_edit(category_name):
         return render_template("recipes.html", message=cat_name, data=data)
     return render_template("login.html")
 
-
-
+@app.route('/logout')
+def logout():
+    """ method to logout a user"""
+    session.pop('user', None)
+    return render_template("login.html")
