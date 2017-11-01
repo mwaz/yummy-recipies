@@ -1,6 +1,6 @@
 import re
 
-from yummy_recipes.models.user import Users
+from .user import Users
 
 class Recipe(Users):
     """
