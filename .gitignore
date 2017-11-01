@@ -2,8 +2,8 @@
 .coverage
 Pipfile
 Pipfile.lock
-__pycache__
-app/__pycache__
+*/pycache
 virtualenv
 dir/
 venv
+__pycache__
