@@ -11,8 +11,6 @@ new_user = Users() #instance of class Users
 new_cat = Recipe() #instance of class Recipe
 
 
-
-
 @app.route('/')
 def index():
     """ Redirects to the index page """
@@ -27,7 +25,7 @@ def register():
         member = request.form['username']
         password = request.form['password']
         cpassword = request.form['cpassword']
-        result = new_user.member_register(email, member, password, cpassword)
+        result = new_user.user_register(email, member, password, cpassword)
         if result == "200,OK":
             session['user'] = member
             msg_output = "Successfully created Account"
@@ -70,10 +68,11 @@ def login():
         email = request.form['email']
         password = request.form['password']
         result_login = new_user.user_login(email, password)
+
         if result_login == "200,OK":
-            member = new_user.get_member(email)
-            email = new_user.get_email(email)
-            session['user'] = member
+            username = new_user.get_registered_user_email(email)
+            email = new_user.get_registered_user_name(email)
+            session['user'] = username
             session['email'] = email
             message = "login successful"
 
@@ -87,10 +86,12 @@ def login():
         elif result_login == "205,Password match":
             message = "Invalid login credentials"
             return render_template("login.html", msg=message)
+
         elif result_login == "404,User not found":
             message = "User does not exist, kindly try again"
             return render_template("login.html", msg=message)
-        elif result_login == "205,Invalid input":
+
+        elif result_login == "205,Empty Input":
             message = "Kindly fill all fields"
             return render_template("login.html", msg=message)
         else:
@@ -107,9 +108,6 @@ def before_request():
         g.member = session['user']
 
 
-
-
-
 @app.route('/cat_register', methods=['GET', 'POST'])
 def category_register():
     """ Method to create a category """
@@ -123,6 +121,11 @@ def category_register():
             if category_create == "200,OK":
                 message = "Successfully created category"
                 return render_template("recipe-categories.html", success=message, data=category_data)
+            
+            elif category_create == "200,OK,UPDATE":
+                message = "Successfully updated category"
+                return render_template("recipe-categories.html", success=message, data=category_data)
+
             elif category_create == "204,Category exists":
                 message = "Category exists"
                 return render_template("recipe-categories.html", msg=message, data=category_data)
@@ -191,6 +194,11 @@ def category_edit(category_name):
             if recipe_edit == "200,OK":
                 message = "Successfully edited category"
                 return render_template("recipe-categories.html", success=message, data=data)
+
+            if recipe_edit == "200,OK,UPDATE":
+                message = "Successfully edited category"
+                return render_template("recipe-categories.html", success=message, data=data)
+
 
             elif recipe_edit == "204,Category exists":
                 message = "Can't edit category! Category Name Exists"
@@ -266,9 +274,10 @@ def recipe_edit(category_name):
         cat_name = category_name
         owner = g.member
         data = new_cat.view_recipe(cat_name, owner)
+        recipe_name = request.form['recipe_name']
         if request.method == "POST":
             new_recipe_name = request.form['new_recipe_name']
-            edit_recipe = new_cat.recipe_edit(new_recipe_name, cat_name, owner)
+            edit_recipe = new_cat.recipe_edit(new_recipe_name, recipe_name, cat_name, owner)
 
             if edit_recipe == "200,OK":
                 message = "Successfully edited recipe"
