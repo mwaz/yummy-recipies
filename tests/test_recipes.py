@@ -8,6 +8,7 @@ class RecipeTest(unittest.TestCase):
     def setUp(self):
         """Defining setUp() method that runs prior to each test."""
         self.newCat = Recipe()
+        self.recipe_register = self.newCat.recipe_register("category", "recipe1", "waweru@gmail.com")
 
     def test_category_registration(self):
         """ Test to test function create category """
@@ -23,14 +24,9 @@ class RecipeTest(unittest.TestCase):
         category_registration = self.newCat.category_register("category", "waweru@gmail.com")
         self.assertIn("204,Category exists", category_registration, "204,Category exists")
 
-    def test_empty_category(self):
-        """ Test to check empty category name """
-        category_empty = self.newCat.category_register("", "waweru@gmail.com")
-        self.assertIn("205,Regex mismatch", category_empty, "205,Regex mismatch")
-
     def test_null_category(self):
         """ Test to test creation of a null category name"""
-        category_registration = self.newCat.category_register(" ", "waweru@gmail.com")
+        category_registration = self.newCat.category_register("", "waweru@gmail.com")
         self.assertIn("205,Invalid Name", category_registration, "205,Invalid Name")
 
     def test_invalid_category_name(self):
@@ -41,51 +37,35 @@ class RecipeTest(unittest.TestCase):
 
     def test_recipe_registration(self):
         """ Test for method create recipe """
-        self.newCat.recipe = []
-        self.newCat.recipe_register("category_one", "recipe1", "waweru@gmail.com")
+        self.recipe_register
         recipe_registration = self.newCat.recipe_register("category", "recipe2" , "waweru@gmail.com")
         self.assertIn("200,OK", recipe_registration, "200,OK")
 
     def test_recipe_regex_match(self):
         """ Test for recipe name regex match """
-        recipe_registration = self.newCat.recipe_register("categor@y", "recipe1", "waweru@gmail.com")
+        recipe_registration = self.newCat.recipe_register("category", "@@@", "waweru@gmail.com")
         self.assertIn("205,Regex mismatch", recipe_registration, "205,Regex mismatch")
-
-    def test_recipe_empty_name(self):
-        """ Test for empty recipe name  """
-        recipe_null = self.newCat.recipe_register("", "recipe1", "waweru@gmail.com")
-        self.assertIn("205,Regex mismatch", recipe_null, "205,Regex mismatch")
 
     def test_recipe_null_name(self):
         """ Test for null recipe name  """
-        recipe_null = self.newCat.recipe_register('', "recipe", "waweru@gmail.com")
-        self.assertIn("205,Regex mismatch", recipe_null, "205,Regex mismatch")
+        recipe_null = self.newCat.recipe_register("category", "", "waweru@gmail.com")
+        self.assertIn("205,Invalid Name", recipe_null, "205,Invalid Name")
 
     def test_recipe_exists(self):
         """ Test for method if recipe exists """
-        self.newCat.recipe = []
+        
         self.newCat.recipe_register("category", "recipe1", "waweru@gmail.com")
         recipe_registration = self.newCat.recipe_register("category", "recipe1", "waweru@gmail.com")
         self.assertIn("204,Recipe exists", recipe_registration, "204,Recipe exists")
 
-    def test_update_category_empty_name(self):
-        """ Test for empty category name on update  """
-        category_null = self.newCat.category_edit("category_one", " ", "mwaz")
-        self.assertIn("205,Invalid Name", category_null, "205,Invalid Name")
-
-    def test_update_recipe_empty_name(self):
-        """ Test for empty recipe name on update  """
-        recipe_null = self.newCat.recipe_edit(" ", "category_one",  "mwaz")
-        self.assertIn("205,Invalid Name", recipe_null, "205,Invalid Name")
-
     def test_update_recipe_regex(self):
         """ Test for recipe name regex pattern name on update  """
-        recipe_regex = self.newCat.recipe_edit("@@@", "category_one", "mwaz")
+        recipe_regex = self.newCat.recipe_edit("@@@","recipe_name", "category_one", "mwaz")
         self.assertIn("205,Regex mismatch", recipe_regex, "205,Regex mismatch")
 
     def test_update_category_regex(self):
         """ Test for category name regex pattern name on update  """
-        category_regex = self.newCat.recipe_edit("category_one", "@@@", "mwaz")
+        category_regex = self.newCat.category_edit( "category_one", "@@@", "mwaz")
         self.assertIn("205,Regex mismatch", category_regex, "205,Regex mismatch")
 
     def test_update_category_exists(self):
@@ -95,7 +75,7 @@ class RecipeTest(unittest.TestCase):
 
     def test_update_recipe_exists(self):
         """ Test for invalid  recipe name on update  """
-        recipe_exists = self.newCat.recipe_edit("","categoryone", "mwaz")
+        recipe_exists = self.newCat.recipe_edit("","categoryone","recipe_name", "mwaz")
         self.assertEqual("205,Invalid Name", recipe_exists,"205,Invalid Name")
 
 
