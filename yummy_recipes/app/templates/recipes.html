@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+
+    <style>
+    .dashboard .container  .panel-group
+    {
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+</style>
+
+</head>
+<body>
+    <!-- Beginning of Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
+            </div>
+            <ul class="nav navbar-nav navbar-left">
+                <li><a href="/cat_register"> <span class="glyphicon glyphicon-book"></span> View Recipe Categories </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"> <span class="glyphicon glyphicon-user"></span> Welcome {{ session['user'] }} </a></li>
+                <li><a href="/logout"> Logout  <span class="glyphicon glyphicon-log-out"></span> </a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <!-- Beginning of Container -->
+    <div class="dashboard">
+        <div class="container">
+            <div class="panel panel-group">
+                <div class="panel panel-primary">
+
+
+                     <div class="panel panel-heading"> {{message}}  - Recipes </div>
+
+
+                     {% if msg %}
+                    <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                    {% endif %}
+
+                    {% if success %}
+                    <center> <div class="alert alert-success">  {{ success }}</div></center>
+                    {% endif %}
+
+                    <!--The recipes panel heading will take the name of the selected recipe category by the user -->
+                    <div class="panel panel-body">
+
+
+                        <!-- Beginning of Table -->
+                        <!-- Modal -->
+                        <a href="#modalForm" role="button" data-toggle="modal" class="btn btn-primary data">  Add Recipe </a>
+                        <br>
+
+                        <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <!-- Content of modal-->
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close"
+                                        data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" id="modal_label">
+                                        Add a recipe to the category
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <form role="form" action="/recipe_register" method="POST">
+
+                                        <div class="form-group">
+                                            <center><label for="recipe_name">Recipe Name </label></center>
+                                            <input type="text" class="form-control"
+                                            id="recipe_name" placeholder="recipe name" name="recipe_name"/>
+
+                                            <input type="hidden" class="form-control" value="{{ message }}"
+                                            placeholder="category name" name="category_name"/>
+
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-default">Create Recipe
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr> <br> </tr>
+                    {% for recipe in data %}
+                        <tr>
+                            <td>{{ recipe[1] }}</td>
+
+                            <td> <a href="#modalForm3{{ recipe[1].replace(' ','') }}" data-toggle="modal"> Update </a>
+
+                        <div class="modal fade" id="modalForm3{{ recipe[1].replace(' ','') }}" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <!-- Content of modal-->
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close"
+                                        data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" >
+                                        Update Recipe
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+
+                                    <form role="form" action="/recipe_edit/{{message}}" method="POST">
+
+                                        <div class="form-group">
+                                            <center><label for="recipe_name">Recipe Name </label></center>
+                                            <input type="text" class="form-control"
+                                             placeholder="recipe Name" name="new_recipe_name"/>
+
+                                             <input type="hidden" class="form-control"
+                                             placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
+
+
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Edit Recipe
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+ </td>
+                            <td>
+                                <form action="/recipe_delete" method="POST">
+                                <input type="hidden" class="form-control" value="{{ recipe[1] }}"
+                                            placeholder="recipe name" name="recipe_name"/>
+                                    <input type="hidden" class="form-control" value="{{ message }}"
+                                            placeholder="recipe name" name="categor_name"/>
+                                    <button type="submit" role="button"> Delete </button>
+                              </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                 </thead>
+                </table>
+                <!-- End of the Recipes Table -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- end of Container -->
+</body>
+</html>
