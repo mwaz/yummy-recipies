@@ -1,5 +1,6 @@
 import unittest
 from models.user import Users
+from models.recipe import Recipe
 
 
 class RecipeTest(unittest.TestCase, Users):
