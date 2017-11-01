@@ -33,31 +33,31 @@ $ cd yummy-recipies
 
 # Create a virtual environment with Python 3.6
 
-$ virtualenv --python=python3.6 yourenvname
+$ virtualenv --python=python3.6 venv
 
 # Activate the virtual environment you have just created
 
-$ source yourenvname/bin/activate
+$ source venv/bin/activate
 
 # Install the application's dependencies from requirements.txt to the virtual environment
 
-$ (yourenvname) pip install -r requirements.txt
+$ (venv) pip install -r requirements.txt
 
 # Set up Unit Test Environment
 
 run the following command to install nose unit testing environment:
 
-$ (yourenvname) pip install nose
+$ (venv) pip install nose
 
 This will enable you to run sngle file tests like.
 
-$ (yourenvname) nosetests -v
+$ (venv) nosetests -v
 
 # Running the program
 
 Run the program by typing the command in your terminal :
 
-$  (yourenvname) python run.py
+$  (venv) python run.py
 you can now use the application.
 
 # Live App on heroku
