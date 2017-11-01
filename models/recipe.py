@@ -99,15 +99,12 @@ class Recipe(object):
 
         for recipe_list in self.recipes:
            
-            # if (any(new_recipe_name == recipe_list[1] for
-            #  recipe_list in self.recipes)) == True:
-            #     return "204,Recipe exists"
-            
-            print (recipe_list[1] + "THIS IS RECIPE LIST")
-            print (recipe_name + "THIS IS RECIPE NAME")
-            if recipe_list[1]==recipe_name:
-                recipe_list[1] = new_recipe_name.replace(" ", "_")
-                return "200,OK"
+            if (any(new_recipe_name == recipe_list[1] for
+                recipe_list in self.recipes)) == True:
+                return "204,Recipe exists"
+
+        recipe_list[1] = new_recipe_name.replace(" ", "_")
+        return "200,OK"
 
 
     def recipe_delete(self, recipe_name, cat_name, owner):
