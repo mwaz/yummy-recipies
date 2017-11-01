@@ -42,7 +42,7 @@ def register():
             msg_output = "Password should have atleat 8 characters with at least a letter and a number and a special character"
             return render_template("registration.html", msg=msg_output)
 
-        elif result == "401,Member exists":
+        elif result == "401,username exists":
             msg_output = "member name already taken"
             return render_template("registration.html", msg=msg_output)
 
