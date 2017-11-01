@@ -37,7 +37,7 @@ class Recipe(object):
 
     def category_edit(self, cat_name, new_cat_name, owner):
         """ method that defines the elements required delete a category """
-        if not(cat_name):
+        if not(new_cat_name):
             return "205,Invalid Name"
 
         if not re.search(regex_name, new_cat_name):
