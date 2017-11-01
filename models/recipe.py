@@ -1,6 +1,6 @@
 import re
 
-from .user import Users
+from models.user import Users
 
 class Recipe(Users):
     """

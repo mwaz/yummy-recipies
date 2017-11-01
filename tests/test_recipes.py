@@ -1,9 +1,8 @@
 import unittest
+from models.user import Users
 
-from models.recipe import Recipe
 
-
-class RecipeTest(unittest.TestCase):
+class RecipeTest(unittest.TestCase, Users):
     """ Class performing unit testing for class Recipe"""
 
     def setUp(self):

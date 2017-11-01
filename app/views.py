@@ -1,9 +1,9 @@
 import os
 from flask import render_template, request, session, g, Flask
-from yummy_recipes.models.user import Users
-from yummy_recipes.models.recipe import Recipe
+from models.user import Users
+from models.recipe import Recipe
 app = Flask(__name__)
-from yummy_recipes.app import app
+from app import app
 
 app.secret_key = os.urandom(24) #needed to keep the client sessions secure
 
