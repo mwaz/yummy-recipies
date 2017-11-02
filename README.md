@@ -6,7 +6,7 @@
 Andela Bootcamp challenge which provides a platform for users to keep track of their
 awesome recipes and share with others if they so wish.
 
-# Contains
+## Contains
 
 The application contains the user interfaces for the yummy-recipies,
 
@@ -14,51 +14,49 @@ UML diagrams for the Project
 
 The flask application for yummy-recipies
 
-# Prerequisites
+## Prerequisites
 
 python 3.6 or a later python version is required to run this app.
 
-# Installing
-clone the repository
+## Installing
+> clone the repository
 
-FOR HTTPS
-https://github.com/mwaz/yummy-recipies
+> [For Https Link ] (https://github.com/mwaz/yummy-recipies)
 
-FOR SSH
-git@github.com:mwaz/yummy-recipies.git
+> [For SSH Link] (git@github.com:mwaz/yummy-recipies.git)
 
-# Change Directory into the project folder
+## Change Directory into the project folder
 
-$ cd yummy-recipies
+> $cd yummy-recipies
 
-# Create a virtual environment with Python 3.6
+## Create a virtual environment with Python 3.6
 
-$ virtualenv --python=python3.6 venv
+> $virtualenv --python=python3.6 venv
 
-# Activate the virtual environment you have just created
+## Activate the virtual environment you have just created
 
-$ source venv/bin/activate
+> $source venv/bin/activate
 
-# Install the application's dependencies from requirements.txt to the virtual environment
+## Install the application's dependencies from requirements.txt to the virtual environment
 
-$ (venv) pip install -r requirements.txt
+> $(venv) pip install -r requirements.txt
 
-# Set up Unit Test Environment
+## Set up Unit Test Environment
 
 run the following command to install nose unit testing environment:
 
-$ (venv) pip install nose
+> $(venv) pip install nose
 
-This will enable you to run sngle file tests like.
+This will enable you to run single file tests like.
 
-$ (venv) nosetests -v
+> $(venv) nosetests -v
 
-# Running the program
+## Running the program
 
 Run the program by typing the command in your terminal :
 
-$  (venv) python run.py
-you can now use the application.
+> $(venv) python run.py
 
-# Live App on heroku
-https://yummy-recipies.herokuapp.com
+
+## Live App on heroku
+[Yummy Recipes] (https://yummy-recipies.herokuapp.com)
