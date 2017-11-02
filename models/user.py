@@ -1,19 +1,21 @@
 import re
 
 
-
 class Users(object):
     """
     Users Class to handle  user functions like login and signup
     """
+    #Dictionary to store the user details
     users = {}
+    # storing a default user for testing purposes, avoiding signup on
+    # every server restart
     users['mwaz@gmail.com'] = {'username': 'mwaz',
                                'email': 'mwaz@gmail.com', 'password': '1234567q'}
 
+    # regex to check if the email entered follows the regex pattern
     regEmail = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+    # regex to check if the username entered follows the regex pattern
     regex_name = "[a-zA-Z0-9- .]+$"
-
-  
 
     def __init__(self, username=None, email=None, password=None):
         """ Initializing  class instance variables"""
@@ -22,10 +24,14 @@ class Users(object):
         self.password = password
         self.regex_username = "[a-zA-Z0-9- .]+$"
 
-
     def user_register(self, email, username, password, cpassasword):
-        """ method that defines the elements required
-         to create a member account
+        """
+         method that defines the how to to create a user account
+         sample structure of how data is stored: 
+         users = { email : { 'username': username, 
+                            'email',: email,
+                            'password',: password}}
+        The email is the key to every user and is unique
         """
 
         if username:
@@ -55,11 +61,11 @@ class Users(object):
                 return "205,Password Regex mismatch"
 
         self.users[email] = {'username': username,
-                        'email': email, 'password': password}
+                             'email': email, 'password': password}
         return "200,OK"
 
     def user_login(self, email, password):
-        """Method to login member"""
+        """Method to login a particular user"""
 
         if not (email and password):
             return "205,Empty input"
@@ -75,12 +81,20 @@ class Users(object):
             return "200,OK"
 
     def get_registered_user_email(self, email):
-        """Method to get registered user email"""
-        user_details = self.users[email] if email in self.users.keys() else False
+        """Method to get registered user name using email
+        checks if email exists in the users dictionary as key
+        then returns the email stored under that email key
+        """
+        user_details = self.users[email] if email in self.users.keys(
+        ) else False
         return user_details['email']
 
     def get_registered_user_name(self, email):
-        """Method to get registered user name using email"""
-        user_details = self.users[email] if email in self.users.keys() else False
+        """
+        Method to get registered user name using email
+        checks if email exists in the users dictionary as key
+        then returns the username stored under that email key
+        """
+        user_details = self.users[email] if email in self.users.keys(
+        ) else False
         return user_details['username']
-

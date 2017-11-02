@@ -19,12 +19,23 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """ Handles the ciew for user registration"""
+    """ 
+    Handles the view for user registration, it then fetches 
+    the return messages in the register methods and returns appropriate
+    messages to the user through the templates
+    """
     if request.method == "POST":
+        #gets the email, password, password and confirm password from the
+        #registration.html template
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
         cpassword = request.form['cpassword']
+        #result stores the result from the method user-register
+        #present in the Users class 
+        #the return statements given out are then emedded on the result variable
+        #then returned to the user in the registration or login templates
+        #depending on the result
         result = new_user.user_register(email, username, password, cpassword)
         if result == "200,OK":
             session['user'] = username
@@ -45,7 +56,7 @@ def register():
             return render_template("registration.html", msg=msg_output)
 
         elif result == "205,Password Regex mismatch":
-            msg_output = "Password should have atleat 8 characters with at least a letter and a number and a special character"
+            msg_output = "Password should have atleat 8 characters"
             return render_template("registration.html", msg=msg_output)
 
         elif result == "401,username exists":
@@ -71,6 +82,10 @@ def register():
 def login():
     """Handles the requests for the login view"""
     if request.method == "POST":
+        #obtains the email and password in the login templates
+        #calls the user_login method in the USER class using the new_cat instance
+        #The status codes are returned and embedded in result_login and are used
+        #to return messages to the login or recipe_categories templates
         email = request.form['email']
         password = request.form['password']
         result_login = new_user.user_login(email, password)
@@ -82,6 +97,7 @@ def login():
             session['email'] = email
             message = "login successful"
 
+            #method in the Users class to display all the recipe categories of a user
             data = new_cat.view_recipe_category(session['user'])
 
             if data is not None:
@@ -111,11 +127,14 @@ def before_request():
     """Method to declare sessions"""
     g.owner = None
     if 'user' in session:
+        #sets the g.owner to the particular owner who has the sessions
+        #using the username provided in the login method
         g.owner = session['user']
 
 @app.route('/cat_register', methods=['GET', 'POST'])
 def category_register():
     """ Method to create a category """
+    #the method will only execute if there is a session present
     if g.owner:
         if request.method == "POST":
             cat_name = request.form['category_name']
@@ -148,7 +167,12 @@ def category_register():
 
 @app.route('/view_category/<category_name>', methods=["POST", "GET"])
 def view_category(category_name):
+    """
+    method to view the recipes that belong to the same category
+    with the same owner
+    """
     if g.owner:
+        #The category name is obtained from the recipe_categories.html templates using GET
         category_name = category_name
         view_cat = new_cat.view_recipe(category_name, g.owner)
         return render_template("recipes.html", message=category_name, data=view_cat)
@@ -158,13 +182,15 @@ def view_category(category_name):
 @app.route('/recipe_register', methods=['GET', 'POST'])
 def recipe_register():
     """method to create a recipe """
+    #executes if the logged in user has a current session
     if g.owner:
         if request.method == "POST":
             recipe_name = request.form['recipe_name']
             cat_name = request.form['category_name']
             owner = g.owner
             recipe_create = new_cat.recipe_register(cat_name, recipe_name, owner)
-            render_category = new_cat.view_recipe(cat_name, g.owner)
+
+            render_recipe = new_cat.view_recipe(cat_name, g.owner)
             if recipe_create == "200,OK":
                 message = "Successfully created recipe"
                 return render_template("recipes.html", success=message, data=render_category, message=cat_name)
@@ -194,8 +220,7 @@ def category_edit(category_name):
             recipe_edit = new_cat.category_edit(cat_name, new_cat_name, g.owner)
             data = new_cat.view_recipe_category(g.owner)
 
-            # recipe_edit = new_cat.recipe_register(new_cat_name, owner)
-
+            
             if recipe_edit == "200,OK":
                 message = "Successfully edited category"
                 return render_template("recipe-categories.html", success=message, data=data)
