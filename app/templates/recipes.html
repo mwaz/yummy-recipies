@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
-    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
 
@@ -76,11 +74,11 @@
                                         <span class="sr-only">Close</span>
                                     </button>
                                     <h4 class="modal-title" id="modal_label">
-                                        Add a recipe to the category
+                                        Add Recipe and Ingredients to the category
                                     </h4>
                                 </div>
 
-                                <!-- Modal Body -->
+                                <!-- Modal Body for Adding Recipe ingredients-->
                                 <div class="modal-body">
 
                                     <form role="form" action="/recipe_register" method="POST">
@@ -92,6 +90,14 @@
 
                                             <input type="hidden" class="form-control" value="{{ message }}"
                                             placeholder="category name" name="category_name"/>
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <center><label for="recipe_ingredients">Recipe Ingredients </label></center>
+                                            <textarea  class="form-control"
+                                            id="recipe_ingredients" name="recipe_ingredients" required>
+                                             </textarea>
 
                                         </div>
 
@@ -113,9 +119,58 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr> <br> </tr>
+                        
                     {% for recipe in data %}
                         <tr>
                             <td>{{ recipe[1] }}</td>
+
+                            <td>
+                             <!-- Modal -->
+                        <a href="#modalFormm{{ recipe[1].replace(' ','') }}" role="button" data-toggle="modal" class="btn btn-primary data">  View Recipe Ingredients </a>
+                        <br>
+
+                        <div class="modal fade" id="modalFormm{{ recipe[1].replace(' ','') }}" tabindex="-1" role="dialog" aria-labelledby="modal_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <!-- Content of modal-->
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <button type="button" class="close"
+                                        data-dismiss="modal">
+                                        <span aria-hidden="true">&times;</span>
+                                        <span class="sr-only">Close</span>
+                                    </button>
+                                    <h4 class="modal-title" id="modal_label">
+                                        Recipe Ingredients
+                                    </h4>
+                                </div>
+
+                                <!-- Modal Body  for view ingredients-->
+                                <div class="modal-body">
+
+                                    <form role="form" action="/description" method="POST">
+                                       <textarea class="form-control" name="recipe_ingredients">{{recipe[3]}}</textarea>     
+                                       
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" value="{{ message }}"
+                                            placeholder="category name" name="category_name"/>
+
+                                        </div> 
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">
+                                            Close
+                                        </button>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </td>
 
                             <td> <a href="#modalForm3{{ recipe[1].replace(' ','') }}" data-toggle="modal"> Update </a>
 
@@ -148,6 +203,14 @@
                                              <input type="hidden" class="form-control"
                                              placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
 
+
+                                        </div>
+
+                                        <div class="form-group">
+                                            <center><label for="recipe_ingredients">Recipe Ingredients </label></center>
+                                            <textarea  class="form-control"
+                                            id="recipe_ingredients" name="recipe_ingredients" required>
+                                             </textarea>
 
                                         </div>
 
