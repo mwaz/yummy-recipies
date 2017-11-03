@@ -225,9 +225,10 @@ def category_delete():
         if request.method == "POST":
             category_name = request.form['category_name']
             delete_result = new_cat.category_delete(category_name, g.owner)
+            delete_recipes = new_recipe.delete_category_recipes(category_name, g.owner)
             data = new_cat.view_recipe_category(g.owner)
 
-            if delete_result == "successfully deleted category":
+            if delete_result == "successfully deleted category" or delete_recipes =="Successfully deleted recipe":
                 msg = "Recipe Category Deleted"
                 return render_template("recipe-categories.html", msg=msg, data=data)
             elif delete_result == "Category doesnt exist":
