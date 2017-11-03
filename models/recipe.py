@@ -91,10 +91,18 @@ class Recipe(Users):
     def recipe_delete(self, recipe_name, cat_name, owner):
         """ method that defines the elements required to delete a recipe """
         for recipe_list in self.recipes:
-            if recipe_list[1] == recipe_name and recipe_list[0] == cat_name and owner:
+            if recipe_list[1] == recipe_name and recipe_list[0] == cat_name:
                 recipe_index = self.recipes.index(recipe_list)
                 del self.recipes[recipe_index]
                 return "Successfully deleted recipe"
+        return "unable to delete recipe"
+
+    def delete_category_recipes(self, cat_name, owner):
+        """ delete all the recipes for a specific category """
+        for recipe_list in self.recipes:
+            recipe_index = self.recipes.index(recipe_list)
+            del self.recipes[recipe_index]
+            return "Successfully deleted recipe"
         return "unable to delete recipe"
 
     def view_recipe(self, cat_name, owner):
