@@ -1,13 +1,13 @@
 import re
 
+
 class Users(object):
     """
     Users Class to handle  user functions like login and signup
     """
-    #Dictionary to store the user details
+    # Dictionary to store the user details
     # storing a default user for testing purposes, avoiding signup on
     # every server restart
-    
 
     def __init__(self, username=None, email=None, password=None):
         """ Initializing  class instance variables"""
@@ -16,11 +16,11 @@ class Users(object):
         self.password = password
         self.regex_username = "[a-zA-Z0-9- .]+$"
         self.users = {}
-        self.regex_email =r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)" 
-        self.regex_name =  "[a-zA-Z0-9- .]+$"
+        self.regex_email = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
+        self.regex_name = "[a-zA-Z0-9- .]+$"
         self.users['mwaz@gmail.com'] = {'username': 'mwaz',
-                               'email': 'mwaz@gmail.com', 
-                               'password': '1234567q'}
+                                        'email': 'mwaz@gmail.com',
+                                        'password': '1234567q'}
 
     def user_register(self, email, username, password, cpassasword):
         """

@@ -2,13 +2,15 @@ import re
 
 from models.user import Users
 
-#class Recipe inherits from the User class, where every method present
-#in the Users class can be used in the Recipes class 
+# class Recipe inherits from the User class, where every method present
+# in the Users class can be used in the Recipes class
+
 
 class Recipe(Users):
     """
       Recipe Class to handle methods to do with recipes
     """
+
     def __init__(self, cat_name=None, owner=None, recipe_name=None, recipe_ingredients=None):
         """ Initializing Recipe class instance variables"""
         self.cat_name = cat_name
@@ -26,10 +28,10 @@ class Recipe(Users):
         recipe_name = None if recipe_name == " " else recipe_name.title()
 
         if recipe_ingredients:
-            recipe_ingredients = re.sub(r'\s+', ' ', recipe_ingredients).strip()
+            recipe_ingredients = re.sub(
+                r'\s+', ' ', recipe_ingredients).strip()
 
         recipe_ingredients = None if recipe_ingredients == " " else recipe_ingredients
-
 
         if not (recipe_name):
             return "Null recipe name"
@@ -44,12 +46,12 @@ class Recipe(Users):
                 and owner == recipe_list[2]
                 and cat_name == recipe_list[0]
                 for recipe_list in self.recipes)) == True:
-            #returns an error if the recipe name is in the same category
-            #and having the same owner 
+            # returns an error if the recipe name is in the same category
+            # and having the same owner
 
             return "Recipe exists"
 
-        #if the recipe name meets the condition it is added to the recipes list
+        # if the recipe name meets the condition it is added to the recipes list
         self.recipes.append([cat_name, recipe_name, owner, recipe_ingredients])
         return "successfully created recipe"
 
@@ -64,10 +66,11 @@ class Recipe(Users):
         new_recipe_name = None if new_recipe_name == " " else new_recipe_name
 
         if recipe_ingredients:
-            recipe_ingredients = re.sub(r'\s+', ' ', recipe_ingredients).strip()
+            recipe_ingredients = re.sub(
+                r'\s+', ' ', recipe_ingredients).strip()
 
         recipe_ingredients = None if recipe_ingredients == " " else recipe_ingredients
-        
+
         if not (new_recipe_name):
             return "Null recipe name"
 
@@ -76,7 +79,7 @@ class Recipe(Users):
 
         for recipe_list in self.recipes:
 
-            #checks to find if the new recipe name exists in the recipes list
+            # checks to find if the new recipe name exists in the recipes list
             if (any(new_recipe_name == recipe_list[1] for
                     recipe_list in self.recipes)) == True:
 

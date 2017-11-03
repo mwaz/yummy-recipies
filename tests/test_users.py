@@ -3,6 +3,7 @@ import unittest
 from models.user import Users
 from app import app
 
+
 class TestUsers(unittest.TestCase):
     """
     class to test the class user
@@ -61,14 +62,13 @@ class TestUsers(unittest.TestCase):
         """ Test to check the length of password """
         result = self.newUser.user_register(
             "waweruh@gmail.com", "mwaz", "passwo", "passwo")
-        self.assertEqual("password length should be atleast 8 characters", result)
+        self.assertEqual(
+            "password length should be atleast 8 characters", result)
 
     def test_root_route(self):
         """ test to see that homepage loads"""
         response = self.test_app.get('/')
         self.assertIn(b'Index', response.data)
-
-
 
     def test_cpassword_is_equal_to_password(self):
         """Test to check whether the confirm password and the passwords are similar """
@@ -81,11 +81,11 @@ class TestUsers(unittest.TestCase):
         member_registration = self.newUser.user_register(
             "waweru@gmail.com", "&#*", "password", "password")
         self.assertEqual("username should not have special characters or spaces",
-                      member_registration)
+                         member_registration)
 
     def test_wrong_pass_login(self):
         """method to test whether registration password is equal to login password"""
-        
+
         result = self.newUser.user_login('waweru@gmail.com', 'pass123')
         self.assertEqual("Password mismatch", result)
 
@@ -109,5 +109,3 @@ class TestUsers(unittest.TestCase):
         """ method to test if both the password and login is null """
         result = self.newUser.user_login('', '')
         self.assertEqual("empty email or password fields", result)
-
-   

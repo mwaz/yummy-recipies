@@ -32,7 +32,7 @@ class RecipeTest(unittest.TestCase, Categories):
     def test_recipe_null_name(self):
         """ Test for null recipe name  """
         recipe_null_name = self.newRecipe.recipe_register(
-            "category", "", "waweru@gmail.com","recipe_ingredients")
+            "category", "", "waweru@gmail.com", "recipe_ingredients")
         self.assertEqual("Null recipe name", recipe_null_name)
 
     def test_recipe_exists(self):

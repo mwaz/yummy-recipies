@@ -2,6 +2,7 @@ import unittest
 
 from app import app
 
+
 class TestUsers(unittest.TestCase):
     """
     class to test the class user
@@ -9,7 +10,7 @@ class TestUsers(unittest.TestCase):
 
     def setUp(self):
         """ Method called to prepare the test fixture """
-   
+
         app.config['TESTING'] = True
         self.test_app = app.test_client()
 

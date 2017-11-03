@@ -4,8 +4,8 @@ from models.user import Users
 from models.recipe import Recipe
 
 
-#class Recipe inherits from the User class, where every method present
-#in the Users class can be used in the Recipes class 
+# class Recipe inherits from the User class, where every method present
+# in the Users class can be used in the Recipes class
 
 class Categories(Users):
     """
@@ -18,11 +18,11 @@ class Categories(Users):
         self.owner = owner
         self.regex_name = "[a-zA-Z- .]+$"
         self.recipe_categories = []
-        self.new_recipe = Recipe() 
+        self.new_recipe = Recipe()
 
     def category_register(self, cat_name, owner):
         """ method that defines the elements required to create an account """
-    
+
         if cat_name:
             cat_name = re.sub(r'\s+', ' ', cat_name).strip()
 
@@ -30,14 +30,14 @@ class Categories(Users):
 
         if not(cat_name):
             return "Category name is null"
-            
+
         if not re.search(self.regex_name, cat_name):
             return "category name has special characters"
-            
+
         if (any(cat_name == category_list[0] and owner == category_list[1]
                 for category_list in self.recipe_categories)) == True:
             return "Category exists"
-            
+
         self.recipe_categories.append([cat_name, owner, ])
         return "Successfully created category"
 
@@ -45,7 +45,7 @@ class Categories(Users):
         """ method that defines the elements required to edit a category """
         if new_cat_name:
             new_cat_name = re.sub(r'\s+', ' ', new_cat_name).strip()
- 
+
         new_cat_name = None if new_cat_name == " " else new_cat_name
 
         if not(new_cat_name):
@@ -55,10 +55,10 @@ class Categories(Users):
             return "category name has special characters"
 
         for category_list in self.recipe_categories:
-            #The loop returns all the categories that belong to a 
-            #specific ower and only updates when te category name
-            #exists in the list
-        
+            # The loop returns all the categories that belong to a
+            # specific ower and only updates when te category name
+            # exists in the list
+
             if category_list[0] == cat_name and category_list[1] == owner:
                 category_list[0] = new_cat_name
 
@@ -67,24 +67,22 @@ class Categories(Users):
                     self.new_recipe.recipes[recipe_index][0] = new_cat_name
                 return "successfully updated category name"
         return "category name exists"
-                       
 
     def category_delete(self, cat_name, owner):
-        
-        #method that defines the elements required delete a category 
-        #the for loop loops to check if the category name exists and 
-        #in recipe_categories list then deletes the index of that 
-        #category.
+
+        # method that defines the elements required delete a category
+        # the for loop loops to check if the category name exists and
+        # in recipe_categories list then deletes the index of that
+        # category.
 
         for category_list in self.recipe_categories:
             if category_list[0] == cat_name and category_list[1] == owner:
                 category_index = self.recipe_categories.index(category_list)
                 self.recipe_categories.pop(category_index)
-                
+
                 return "successfully deleted category"
         return "Category doesnt exist"
 
-              
     def view_recipe_category(self, owner):
         """
         method used to display all the categories that are present in 
