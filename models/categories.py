@@ -75,16 +75,12 @@ class Categories(Users):
         #the for loop loops to check if the category name exists and 
         #in recipe_categories list then deletes the index of that 
         #category.
-        
+
         for category_list in self.recipe_categories:
             if category_list[0] == cat_name and category_list[1] == owner:
                 category_index = self.recipe_categories.index(category_list)
                 self.recipe_categories.pop(category_index)
                 
-                for recipe_list in self.new_recipe.recipes:
-                    recipe_index = new_recipe.recipes.index(recipe_list)
-                    del self.new_recipe.recipes
-
                 return "successfully deleted category"
         return "Category doesnt exist"
 
