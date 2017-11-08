@@ -18,6 +18,9 @@ class Users(object):
         self.users = {}
         self.regex_email = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
         self.regex_name = "[a-zA-Z0-9- .]+$"
+        self.users = { 'mwaz@gmail.com' : { 'username': 'mwaz', 
+                            'email': 'mwaz@gmail.com',
+                            'password': '1234567q'}}
         
     def user_register(self, email, username, password, cpassasword):
         """
