@@ -118,7 +118,7 @@ def login():
             message = "Invalid credentials, try again"
             return render_template("login.html", msg=message)
     return render_template("login.html")
-
+    
 
 @app.before_request
 def before_request():
