@@ -250,8 +250,10 @@ def recipe_register():
             recipe_name = request.form['recipe_name']
             cat_name = request.form['category_name']
             recipe_ingredients = request.form['recipe_ingredients']
+            recipe_methods = request.form['recipe_methods']
+
             owner = g.owner
-            recipe_create = new_recipe.recipe_register(cat_name, recipe_name, owner, recipe_ingredients)
+            recipe_create = new_recipe.recipe_register(cat_name, recipe_name, owner, recipe_ingredients, recipe_methods)
 
             render_recipe = new_recipe.view_recipe(cat_name, g.owner)
             if recipe_create == "successfully created recipe":
@@ -270,7 +272,10 @@ def recipe_register():
                 message = "Kindly provide recipe ingridients for the recipe"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
             
-
+            elif recipe_create == "Null recipe method":
+                message = "Kindly provide recipe preparations"
+                return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
+            
             elif recipe_create == "Recipe name has special characters":
                 message = "Recipe Name should only have letters "
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
@@ -313,10 +318,12 @@ def recipe_edit(category_name):
         data = new_recipe.view_recipe(cat_name, owner)
         recipe_name = request.form['recipe_name']
         recipe_ingredients = request.form['recipe_ingredients']
+        recipe_methods = request.form['recipe_methods']
+
 
         if request.method == "POST":
             new_recipe_name = request.form['new_recipe_name']
-            edit_recipe = new_recipe.recipe_edit(new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients)
+            edit_recipe = new_recipe.recipe_edit(new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods)
 
             if edit_recipe == "Successfully edited recipe":
                 message = "Successfully edited recipe"
