@@ -11,7 +11,7 @@ class Recipe(Users):
       Recipe Class to handle methods to do with recipes
     """
 
-    def __init__(self, cat_name=None, owner=None, recipe_name=None, recipe_ingredients=None):
+    def __init__(self, cat_name=None, owner=None, recipe_name=None, recipe_ingredients=None, recipe_methods=None):
         """ Initializing Recipe class instance variables"""
         self.cat_name = cat_name
         self.owner = owner
@@ -19,8 +19,9 @@ class Recipe(Users):
         self.regex_name = "[a-zA-Z- .]+$"
         self.recipes = []
         self.recipe_ingredients = recipe_ingredients
+        self.recipe_methods = recipe_methods
 
-    def recipe_register(self, cat_name, recipe_name, owner, recipe_ingredients):
+    def recipe_register(self, cat_name, recipe_name, owner, recipe_ingredients, recipe_methods):
         """ method that defines the elements required to create an account """
         if recipe_name:
             recipe_name = re.sub(r'\s+', ' ', recipe_name).strip()
@@ -33,11 +34,20 @@ class Recipe(Users):
 
         recipe_ingredients = None if recipe_ingredients == " " else recipe_ingredients
 
+        if recipe_methods:
+            recipe_methods = re.sub(
+                r'\s+', ' ', recipe_methods).strip()
+
+        recipe_methods = None if recipe_methods == " " else recipe_methods
+
         if not (recipe_name):
             return "Null recipe name"
 
         if not (recipe_ingredients):
             return "Null recipe ingredients"
+
+        if not (recipe_methods):
+            return "Null recipe method"
 
         if not re.search(self.regex_name, recipe_name):
             return "Recipe name has special characters"
@@ -50,12 +60,13 @@ class Recipe(Users):
             # and having the same owner
 
             return "Recipe exists"
+        print(recipe_methods)
 
         # if the recipe name meets the condition it is added to the recipes list
         self.recipes.append([cat_name, recipe_name, owner, recipe_ingredients])
         return "successfully created recipe"
 
-    def recipe_edit(self, new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients):
+    def recipe_edit(self, new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods):
         """ method that defines how to edit a recipe, the method takes 
             the new recipe name as a parameter, the recipe name and the category
             name, all belonging to the logged in user
@@ -70,6 +81,13 @@ class Recipe(Users):
                 r'\s+', ' ', recipe_ingredients).strip()
 
         recipe_ingredients = None if recipe_ingredients == " " else recipe_ingredients
+
+        if recipe_methods:
+            recipe_methods = re.sub(
+                r'\s+', ' ', recipe_methods).strip()
+
+        recipe_methods = None if recipe_methods == " " else recipe_methods
+
 
         if not (new_recipe_name):
             return "Null recipe name"
