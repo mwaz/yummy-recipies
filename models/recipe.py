@@ -60,7 +60,7 @@ class Recipe(Users):
             # and having the same owner
 
             return "Recipe exists"
-        print(recipe_methods)
+
 
         # if the recipe name meets the condition it is added to the recipes list
         self.recipes.append([cat_name, recipe_name, owner, recipe_ingredients])
