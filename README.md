@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/mwaz/yummy-recipies.svg?branch=challenge_two)](https://travis-ci.org/mwaz/yummy-recipies)
 [![Coverage Status](https://coveralls.io/repos/github/mwaz/yummy-recipies/badge.svg?branch=develop)](https://coveralls.io/github/mwaz/yummy-recipies?branch=develop)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/62390e605e7b45cca80d9124370fec28)](https://www.codacy.com/app/mwaz/yummy-recipies?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mwaz/yummy-recipies&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/52e878916d0ff93df8be/maintainability)](https://codeclimate.com/github/mwaz/yummy-recipies/maintainability)
 [![License](http://img.shields.io/:license-mit-blue.svg)](https://github.com/mwaz/yummy-recipies/blob/challenge_two/licence.txt)
 
