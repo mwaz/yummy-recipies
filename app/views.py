@@ -56,10 +56,6 @@ def register():
             msg_output = "Password should have atleat 8 characters"
             return render_template("registration.html", msg=msg_output)
 
-        elif result == "username exists":
-            msg_output = "user name already taken"
-            return render_template("registration.html", msg=msg_output)
-
         elif result == "Passwords dont match":
             msg_output = "Passwords dont match"
             return render_template("registration.html", msg=msg_output)
