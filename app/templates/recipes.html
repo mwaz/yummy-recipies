@@ -150,19 +150,19 @@
                                 <span class="sr-only">Close</span>
                             </button>
                             <h4 class="modal-title" id="modal_label">
-                                Recipe Ingredients
+                                Recipe Ingredients for <strong>{{recipe[1]}}</strong>
                             </h4>
                         </div>
 
                         <!-- Modal Body  to view ingredients-->
                         <div class="modal-body">
-                         <textarea class="form-control" name="recipe_ingredients">{{recipe[3]}}
+                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[3]}}
                          </textarea>     
                          <br>
 
                          <h4 class="modal-title" id="modal_label">Recipe Preparations</h4>
-                         <textarea class="form-control" name="recipe_methods" placeholder="{{recipe[4]}}">{{recipe[4]}}
-                         </textarea>                                               
+                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[4]}}
+                         </textarea>                                             
 
                          <div class="form-group">
                             <input type="hidden" class="form-control" value="{{ message }}"
@@ -196,7 +196,7 @@
                     <span class="sr-only">Close</span>
                 </button>
                 <h4 class="modal-title" >
-                    Update Recipe
+                    Update Recipe for <strong> {{recipe[1]}} </strong>
                 </h4>
             </div>
 
@@ -208,7 +208,7 @@
                     <div class="form-group">
                         <center><label for="recipe_name">Recipe Name </label></center>
                         <input type="text" class="form-control"
-                        placeholder="recipe Name" name="new_recipe_name"/>
+                        placeholder="{{recipe[1]}}" name="new_recipe_name"/>
 
                         <input type="hidden" class="form-control"
                         placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
