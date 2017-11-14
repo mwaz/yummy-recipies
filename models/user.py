@@ -43,9 +43,6 @@ class Users(object):
         if not re.search(self.regex_username, username):
             return "username should not have special characters or spaces"
 
-        if username in self.users:
-            return "username exists"
-
         if not re.search(self.regex_email, email):
             return "Email format is invalid"
 
