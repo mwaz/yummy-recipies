@@ -6,11 +6,11 @@ from models.categories import Categories
 app = Flask(__name__)
 from app import app
 
-app.secret_key = os.urandom(24) #needed to keep the client sessions secure
+app.secret_key = os.urandom(24)  # needed to keep the client sessions secure
 
-new_user = Users() #instance of class Users
-new_cat = Categories() #instance of class Category
-new_recipe = Recipe() #instance of class Recipe
+new_user = Users()  # instance of class Users
+new_cat = Categories()  # instance of class Category
+new_recipe = Recipe()  # instance of class Recipe
 
 
 @app.route('/')
@@ -27,17 +27,17 @@ def register():
     messages to the user through the templates
     """
     if request.method == "POST":
-        #gets the email, password, password and confirm password from the
-        #registration.html template
+        # gets the email, password, password and confirm password from the
+        # registration.html template
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
         cpassword = request.form['cpassword']
-        #result stores the result from the method user-register
-        #present in the Users class 
-        #the return statements given out are then emedded on the result variable
-        #then returned to the user in the registration or login templates
-        #depending on the result
+        # result stores the result from the method user-register
+        # present in the Users class
+        # the return statements given out are then emedded on the result variable
+        # then returned to the user in the registration or login templates
+        # depending on the result
         result = new_user.user_register(email, username, password, cpassword)
         if result == "Successfully created account":
             session['user'] = username
@@ -75,10 +75,10 @@ def register():
 def login():
     """Handles the requests for the login view"""
     if request.method == "POST":
-        #obtains the email and password in the login templates
-        #calls the user_login method in the USER class using the new_cat instance
-        #The status codes are returned and embedded in result_login and are used
-        #to return messages to the login or recipe_categories templates
+        # obtains the email and password in the login templates
+        # calls the user_login method in the USER class using the new_cat instance
+        # The status codes are returned and embedded in result_login and are used
+        # to return messages to the login or recipe_categories templates
         email = request.form['email']
         password = request.form['password']
         result_login = new_user.user_login(email, password)
@@ -91,7 +91,8 @@ def login():
             session['email'] = email['email']
             message = "login successful"
 
-            #method in the Users class to display all the recipe categories of a user
+            # method in the Users class to display all the recipe categories of
+            # a user
             data = new_cat.view_recipe_category(session['user'])
 
             if data is not None:
@@ -114,21 +115,22 @@ def login():
             message = "Invalid credentials, try again"
             return render_template("login.html", msg=message)
     return render_template("login.html")
-    
+
 
 @app.before_request
 def before_request():
     """Method to declare sessions"""
     g.owner = None
     if 'user' in session:
-        #sets the g.owner to the particular owner who has the sessions
-        #using the username provided in the login method
+        # sets the g.owner to the particular owner who has the sessions
+        # using the username provided in the login method
         g.owner = session['user']
+
 
 @app.route('/cat_register', methods=['GET', 'POST'])
 def category_register():
     """ Method to create a category """
-    #the method will only execute if there is a session present
+    # the method will only execute if there is a session present
     if g.owner:
         if request.method == "POST":
             cat_name = request.form['category_name']
@@ -139,19 +141,18 @@ def category_register():
             if category_create == "Successfully created category":
                 message = "Successfully created category"
                 return render_template("recipe-categories.html", success=message, data=category_data)
-            
+
             elif category_create == "Category exists":
                 message = "Category exists"
                 return render_template("recipe-categories.html", msg=message, data=category_data)
-            
+
             elif category_create == "Category name is null":
                 message = "Kndly enter the category name"
                 return render_template("recipe-categories.html", msg=message, data=category_data)
-            
+
             elif category_create == "category name has special characters":
                 message = "Category name should only have letters"
                 return render_template("recipe-categories.html", msg=message, data=category_data)
-            
 
             else:
                 message = "unable to create category"
@@ -169,12 +170,12 @@ def view_category(category_name):
     with the same owner
     """
     if g.owner:
-        #The category name is obtained from the recipe_categories.html templates using GET
+        # The category name is obtained from the recipe_categories.html
+        # templates using GET
         category_name = category_name
         view_cat = new_recipe.view_recipe(category_name, g.owner)
         return render_template("recipes.html", message=category_name, data=view_cat)
     return render_template("login.html")
-
 
 
 @app.route('/category_edit/<category_name>', methods=['GET', 'POST'])
@@ -184,9 +185,10 @@ def category_edit(category_name):
         if request.method == "POST":
             cat_name = category_name
             new_cat_name = request.form['cat_name']
-            category_result = new_cat.category_edit(cat_name, new_cat_name, g.owner)
+            category_result = new_cat.category_edit(
+                cat_name, new_cat_name, g.owner)
             data = new_cat.view_recipe_category(g.owner)
-            
+
             if category_result == "successfully updated category name":
                 message = "Successfully edited category"
                 return render_template("recipe-categories.html", success=message, data=data)
@@ -221,10 +223,11 @@ def category_delete():
         if request.method == "POST":
             category_name = request.form['category_name']
             delete_result = new_cat.category_delete(category_name, g.owner)
-            delete_recipes = new_recipe.delete_category_recipes(category_name, g.owner)
+            delete_recipes = new_recipe.delete_category_recipes(
+                category_name, g.owner)
             data = new_cat.view_recipe_category(g.owner)
 
-            if delete_result == "successfully deleted category" or delete_recipes =="Successfully deleted recipe":
+            if delete_result == "successfully deleted category" or delete_recipes == "Successfully deleted recipe":
                 msg = "Recipe Category Deleted"
                 return render_template("recipe-categories.html", msg=msg, data=data)
             elif delete_result == "Category doesnt exist":
@@ -240,7 +243,7 @@ def category_delete():
 @app.route('/recipe_register', methods=['GET', 'POST'])
 def recipe_register():
     """method to create a recipe """
-    #executes if the logged in user has a current session
+    # executes if the logged in user has a current session
     if g.owner:
         if request.method == "POST":
             recipe_name = request.form['recipe_name']
@@ -249,39 +252,39 @@ def recipe_register():
             recipe_methods = request.form['recipe_methods']
 
             owner = g.owner
-            recipe_create = new_recipe.recipe_register(cat_name, recipe_name, owner, recipe_ingredients, recipe_methods)
+            recipe_create = new_recipe.recipe_register(
+                cat_name, recipe_name, owner, recipe_ingredients, recipe_methods)
 
             render_recipe = new_recipe.view_recipe(cat_name, g.owner)
             if recipe_create == "successfully created recipe":
                 message = "Successfully created recipe"
                 return render_template("recipes.html", success=message, data=render_recipe, message=cat_name)
-            
+
             elif recipe_create == "Recipe exists":
                 message = "Recipe exists"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
-            
+
             elif recipe_create == "Null recipe name":
                 message = "Recipe name is NOT provided"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
-            
+
             elif recipe_create == "Null recipe ingredients":
                 message = "Kindly provide recipe ingridients for the recipe"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
-            
+
             elif recipe_create == "Null recipe method":
                 message = "Kindly provide recipe preparations"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
-            
+
             elif recipe_create == "Recipe name has special characters":
                 message = "Recipe Name should only have letters "
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
-            
+
             else:
                 message = "unable to create recipe"
                 return render_template("recipes.html", msg=message, data=render_recipe, message=cat_name)
         return render_template("recipes.html")
     return render_template("login.html")
-
 
 
 @app.route('/recipe_delete', methods=['GET', 'POST'])
@@ -291,13 +294,14 @@ def recipe_delete():
         if request.method == "POST":
             data = request.form['categor_name']
             recipe_name = request.form['recipe_name']
-            delete_result = new_recipe.recipe_delete(recipe_name, data, g.owner)
+            delete_result = new_recipe.recipe_delete(
+                recipe_name, data, g.owner)
             recipe_data = new_recipe.view_recipe(data, g.owner)
 
             if delete_result == "Successfully deleted recipe":
                 msg = "Recipe Deleted"
-                return render_template("recipes.html", msg=msg, message=data, data=recipe_data)      
-            
+                return render_template("recipes.html", msg=msg, message=data, data=recipe_data)
+
             else:
                 msg = "unable to delete recipe"
                 return render_template("recipes.html", msg=msg, message=data, data=recipe_data)
@@ -316,10 +320,10 @@ def recipe_edit(category_name):
         recipe_ingredients = request.form['recipe_ingredients']
         recipe_methods = request.form['recipe_methods']
 
-
         if request.method == "POST":
             new_recipe_name = request.form['new_recipe_name']
-            edit_recipe = new_recipe.recipe_edit(new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods)
+            edit_recipe = new_recipe.recipe_edit(
+                new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods)
 
             if edit_recipe == "Successfully edited recipe":
                 message = "Successfully edited recipe"
@@ -343,6 +347,7 @@ def recipe_edit(category_name):
 
         return render_template("recipes.html", message=cat_name, data=data)
     return render_template("login.html")
+
 
 @app.route('/logout')
 def logout():
