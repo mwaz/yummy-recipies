@@ -1,1 +1,9 @@
 .idea
+.coverage
+Pipfile
+Pipfile.lock
+*/pycache
+virtualenv
+dir/
+venv
+__pycache__

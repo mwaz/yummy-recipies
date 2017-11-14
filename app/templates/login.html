@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head Tag begins here -->
+<head>
+    <meta charset="UTF-8">
+    <title>User Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style type="text/css">
+        .container  {
+        width: 60%;
+        }
+
+        .FormBox {
+        height: 45%;
+        }
+
+</style>
+</head>
+
+<!-- Head Tag Ends here -->
+
+<body>
+    <!-- Beginning of Navbar -->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Yummy Recipes <span class="glyphicon glyphicon-cutlery"></span></a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/register"> Sign Up <span class="glyphicon glyphicon-tasks"></span></a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+    <!-- Beginning of Container holding the panels  -->
+    <div class="container">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Yummy Recipies Login Form
+                </div>
+                <div class="panel-body">
+                    {% if msg %}
+                    <center> <div class="alert alert-danger">  {{ msg }}</div></center>
+                    {% endif %}
+
+                    {% if success %}
+                    <center> <div class="alert alert-success">  {{ success }}</div></center>
+                    {% endif %}
+                    <div class="right">
+                        <div class="FormBox">
+                            <form action= "/login" method="POST">
+                                <p> Email </p>
+                                <input type="email" name="email" placeholder="">
+                                <p> Password</p>
+                                <input type="password" name="password" placeholder="">
+                                <button type="submit" class="btn btn-primary btn-lg">Login</button> <br> <br>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+    <!-- End of Container holding the panel class -->
+</body>
+</html>
