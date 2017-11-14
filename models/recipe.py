@@ -63,7 +63,7 @@ class Recipe(Users):
 
 
         # if the recipe name meets the condition it is added to the recipes list
-        self.recipes.append([cat_name, recipe_name, owner, recipe_ingredients])
+        self.recipes.append([cat_name, recipe_name, owner, recipe_ingredients, recipe_methods])
         return "successfully created recipe"
 
     def recipe_edit(self, new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods):
@@ -107,6 +107,10 @@ class Recipe(Users):
 
         if recipe_ingredients:
             recipe_list[3] = recipe_ingredients
+
+        if recipe_methods:
+            recipe_list[4] = recipe_methods
+
         return "Successfully edited recipe"
 
     def recipe_delete(self, recipe_name, cat_name, owner):
