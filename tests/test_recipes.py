@@ -35,6 +35,18 @@ class RecipeTest(unittest.TestCase, Categories):
             "category", "", "waweru@gmail.com", "recipe_ingredients", "recipe_methods")
         self.assertEqual("Null recipe name", recipe_null_name)
 
+    def test_recipe_null_ingredients(self):
+        """ Test for null recipe ingredients """
+        recipe_null_ingredients = self.newRecipe.recipe_register(
+            "category", "recipe_name", "waweru@gmail.com", "", "recipe_methods")
+        self.assertEqual("Null recipe ingredients", recipe_null_ingredients)
+
+    def test_recipe_null_methods(self):
+        """ Test for null recipe preparation methods  """
+        recipe_null_methods = self.newRecipe.recipe_register(
+            "category", "recipe_name", "waweru@gmail.com", "recipe_ingredients", "")
+        self.assertEqual("Null recipe method", recipe_null_methods)
+
     def test_recipe_exists(self):
         """ Test for method if recipe exists """
         recipe_exists = self.newRecipe.recipe_register(
