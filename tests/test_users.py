@@ -85,9 +85,13 @@ class TestUsers(unittest.TestCase):
 
     def test_wrong_pass_login(self):
         """method to test whether registration password is equal to login password"""
-
         result = self.newUser.user_login('waweru@gmail.com', 'pass123')
         self.assertEqual("Password mismatch", result)
+
+    def test_success_login(self):
+        """method to test a successful login attempt"""
+        result = self.newUser.user_login('waweru@gmail.com', 'password')
+        self.assertEqual("Success login", result)
 
     def test_wrong_email_login(self):
         """ method to test if the email used for login is wrong"""
