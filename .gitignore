@@ -7,3 +7,5 @@ virtualenv
 dir/
 venv
 __pycache__
+.noseids
+.vscode/settings.json
