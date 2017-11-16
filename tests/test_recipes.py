@@ -1,7 +1,8 @@
+"""Class to test Recipe edit, delete addition and recipe routes"""
 import unittest
-from models.user import Users
 from models.recipe import Recipe
 from models.categories import Categories
+from app import app
 
 
 class RecipeTest(unittest.TestCase, Categories):
@@ -14,6 +15,12 @@ class RecipeTest(unittest.TestCase, Categories):
         self.recipe_register = self.newRecipe.recipe_register(
             "category", "recipe", "waweru@gmail.com", "recipe_ingredients", "recipe_methods")
         self.newCategory.category_register("category_one", "waweru@gmail.com")
+        app.config['TESTING'] = True
+        self.test_app = app.test_client()
+    def test_recipe_register_route(self):
+        """ Test to check if recipe register route works"""
+        response = self.test_app.get('/recipe_register')
+        self.assertEqual(response.status_code, 200)
 
     def test_recipe_registration(self):
         """ Test for method create recipe """
@@ -53,6 +60,11 @@ class RecipeTest(unittest.TestCase, Categories):
             "category", "recipe", "waweru@gmail.com", "recipe_ingredients", "recipe_methods")
         self.assertEqual("Recipe exists", recipe_exists)
 
+    def test_recipe_edit_route(self):
+        """ Test to check if recipe edit route works"""
+        response = self.test_app.get('/recipe_edit/Panckakes')
+        self.assertEqual(response.status_code, 200)
+
     def test_edit_recipe_regex_format(self):
         """ Test for recipe name regex pattern name on update  """
         edit_recipe_regex = self.newRecipe.recipe_edit(
@@ -71,3 +83,8 @@ class RecipeTest(unittest.TestCase, Categories):
         recipe_edit_success = self.newRecipe.recipe_edit(
             "new_recipe", "categoryone", "recipe_name", "mwaz", "recipe_ingredients", "recipe_methods")
         self.assertEqual("Successfully edited recipe", recipe_edit_success)
+
+    def test_recipe_delete_route(self):
+        """ Test to check if recipe delete route works"""
+        response = self.test_app.get('/recipe_delete')
+        self.assertEqual(response.status_code, 200)

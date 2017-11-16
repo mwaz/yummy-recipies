@@ -1,3 +1,4 @@
+"""Class to test User creation, routes on register and login"""
 import unittest
 
 from models.user import Users
@@ -16,6 +17,21 @@ class TestUsers(unittest.TestCase):
             "waweru@gmail.com", "mwaz", "password", "password")
         app.config['TESTING'] = True
         self.test_app = app.test_client()
+
+    def test_root_route(self):
+        """ test to see that homepage loads"""
+        response = self.test_app.get('/')
+        self.assertIn(b'Index', response.data)
+
+    def test_login_route(self):
+        """ Test to check if the login route loads"""
+        response = self.test_app.get('/login')
+        self.assertEquals(response.status_code, 200)
+
+    def test_register_route(self):
+        """ Test to check if the user register route loads"""
+        response = self.test_app.get('/register')
+        self.assertEquals(response.status_code, 200)
 
     def test_user_email_exists_on_register(self):
         """ Test to if user email exists on register """
@@ -64,11 +80,6 @@ class TestUsers(unittest.TestCase):
             "waweruh@gmail.com", "mwaz", "passwo", "passwo")
         self.assertEqual(
             "password length should be atleast 8 characters", result)
-
-    def test_root_route(self):
-        """ test to see that homepage loads"""
-        response = self.test_app.get('/')
-        self.assertIn(b'Index', response.data)
 
     def test_cpassword_is_equal_to_password(self):
         """Test to check whether the confirm password and the passwords are similar """
