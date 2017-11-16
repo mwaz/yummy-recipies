@@ -50,7 +50,7 @@ class Users(object):
         if not re.search(self.regex_email, email):
             return "Email format is invalid"
 
-        if email in self.users:
+        if self.get_registered_user_details(email):
             return "Email exists"
 
         if password != cpassasword:
