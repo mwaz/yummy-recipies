@@ -38,8 +38,8 @@ class Users(object):
         username = None if username == " " else username
 
         if email:
-            lowercase_email = email.lower()
-        email = lowercase_email
+            email = email.lower()
+        email = email
 
         if not (username and email and password and cpassasword):
             return "please input all fields"
