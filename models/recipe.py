@@ -98,7 +98,7 @@ class Recipe(Users):
         for recipe_list in self.recipes:
 
             # checks to find if the new recipe name exists in the recipes list
-            if (any(new_recipe_name == recipe_list[1] for
+            if (any(new_recipe_name == recipe_list[1] and recipe_ingredients == recipe_list[3] and recipe_methods ==  recipe_list[4] for
                     recipe_list in self.recipes)) is True:
 
                 return "Recipe exists"
