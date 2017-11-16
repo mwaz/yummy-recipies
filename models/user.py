@@ -35,8 +35,11 @@ class Users(object):
 
         if username:
             username = re.sub(r'\s+', ' ', username).strip()
-
         username = None if username == " " else username
+
+        if email:
+            lowercase_email = email.lower()
+        email = lowercase_email
 
         if not (username and email and password and cpassasword):
             return "please input all fields"
