@@ -1,3 +1,4 @@
+"""Class that defines how to create a user and log them in"""
 import re
 
 
@@ -18,17 +19,17 @@ class Users(object):
         self.users = {}
         self.regex_email = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
         self.regex_name = "[a-zA-Z0-9- .]+$"
-        self.users = { 'mwaz@gmail.com' : { 'username': 'mwaz', 
-                            'email': 'mwaz@gmail.com',
-                            'password': '1234567q'}}
-        
+        self.users = {'mwaz@gmail.com': {'username': 'mwaz',
+                                         'email': 'mwaz@gmail.com',
+                                         'password': '1234567q'}}
+
     def user_register(self, email, username, password, cpassasword):
         """
          method that defines the how to to create a user account
-         sample structure of how data is stored: 
-         users = { email : { 'username': username, 
-                            'email',: email,
-                            'password',: password}}
+         sample structure of how data is stored:
+         users = { email : { 'username': username,
+                             'email',: email,
+                             'password',: password}}
         The email is the key to every user and is unique
         """
 
