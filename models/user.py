@@ -69,7 +69,7 @@ class Users(object):
         if not (email and password):
             return "empty email or password fields"
 
-        if email not in self.users:
+        if not self.get_registered_user_details(email):
             return "email not found"
 
         result = self.users[email]
