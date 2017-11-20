@@ -69,9 +69,6 @@ class Users(object):
         if not (email and password):
             return "empty email or password fields"
 
-        if not self.get_registered_user_details(email):
-            return "email not found"
-
         result = self.users[email]
         passwd = result['password']
         if passwd != password:
