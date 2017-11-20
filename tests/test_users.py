@@ -104,12 +104,6 @@ class TestUsers(unittest.TestCase):
         result = self.newUser.user_login('waweru@gmail.com', 'password')
         self.assertEqual("Success login", result)
 
-    def test_wrong_email_login(self):
-        """ method to test if the email used for login is wrong"""
-        self.register
-        result = self.newUser.user_login('wawerum@gmail.com', 'pass')
-        self.assertEqual("email not found", result)
-
     def test_null_email_login(self):
         """ method to test if the email used for login is null"""
         result = self.newUser.user_login('', 'pass')
