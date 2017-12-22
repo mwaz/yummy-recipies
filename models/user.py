@@ -1,3 +1,4 @@
+"""Class that defines how to create a user and log them in"""
 import re
 
 
@@ -18,24 +19,27 @@ class Users(object):
         self.users = {}
         self.regex_email = r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)"
         self.regex_name = "[a-zA-Z0-9- .]+$"
-        self.users = { 'mwaz@gmail.com' : { 'username': 'mwaz', 
-                            'email': 'mwaz@gmail.com',
-                            'password': '1234567q'}}
-        
+        self.users = {'mwaz@gmail.com': {'username': 'mwaz',
+                                         'email': 'mwaz@gmail.com',
+                                         'password': '1234567q'}}
+
     def user_register(self, email, username, password, cpassasword):
         """
          method that defines the how to to create a user account
-         sample structure of how data is stored: 
-         users = { email : { 'username': username, 
-                            'email',: email,
-                            'password',: password}}
+         sample structure of how data is stored:
+         users = { email : { 'username': username,
+                             'email',: email,
+                             'password',: password}}
         The email is the key to every user and is unique
         """
 
         if username:
             username = re.sub(r'\s+', ' ', username).strip()
-
         username = None if username == " " else username
+
+        if email:
+            email = email.lower()
+        email = email
 
         if not (username and email and password and cpassasword):
             return "please input all fields"
@@ -46,7 +50,7 @@ class Users(object):
         if not re.search(self.regex_email, email):
             return "Email format is invalid"
 
-        if email in self.users:
+        if self.get_registered_user_details(email):
             return "Email exists"
 
         if password != cpassasword:
@@ -64,9 +68,6 @@ class Users(object):
 
         if not (email and password):
             return "empty email or password fields"
-
-        if email not in self.users:
-            return "email not found"
 
         result = self.users[email]
         passwd = result['password']

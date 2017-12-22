@@ -95,28 +95,24 @@
 
                                     <div class="form-group">
                                         <center><label for="recipe_ingredients">Recipe Ingredients </label></center>
-                                        <textarea  class="form-control"
-                                        id="recipe_ingredients" name="recipe_ingredients">
-                                    </textarea>
+                                    <textarea class="form-control" name="recipe_ingredients"></textarea>  
 
                                 </div>
 
                                 <div class="form-group">
                                     <center><label for="recipe_methods">Recipe Preparation </label></center>
-                                    <textarea  class="form-control"
-                                    id="recipe_methods" name="recipe_methods">
-                                </textarea>
+                                    <textarea  class="form-control" id="recipe_methods" name="recipe_methods"></textarea>
 
                             </div>
 
 
                             <!-- Modal Footer -->
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
+                                <button type="button" class="btn btn-danger"
                                 data-dismiss="modal">
-                                Close
+                                Cancel
                             </button>
-                            <button type="submit" class="btn btn-default">Create Recipe
+                            <button type="submit" class="btn btn-primary">Create Recipe
                             </button>
                         </div>
                     </form>
@@ -156,13 +152,11 @@
 
                         <!-- Modal Body  to view ingredients-->
                         <div class="modal-body">
-                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[3]}}
-                         </textarea>     
+                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[3]}}</textarea>     
                          <br>
 
                          <h4 class="modal-title" id="modal_label">Recipe Preparations</h4>
-                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[4]}}
-                         </textarea>                                             
+                         <textarea class="form-control" name="recipe_ingredients" readonly="">{{recipe[4]}}</textarea>                                             
 
                          <div class="form-group">
                             <input type="hidden" class="form-control" value="{{ message }}"
@@ -208,7 +202,7 @@
                     <div class="form-group">
                         <center><label for="recipe_name">Recipe Name </label></center>
                         <input type="text" class="form-control"
-                        placeholder="{{recipe[1]}}" name="new_recipe_name"/>
+                        placeholder="{{recipe[1]}}" value="{{recipe[1]}}" name="new_recipe_name"/>
 
                         <input type="hidden" class="form-control"
                         placeholder="recipe Name" name="recipe_name" value="{{ recipe[1] }} "/>
@@ -218,26 +212,23 @@
 
                     <div class="form-group">
                         <center><label for="recipe_ingredients">Recipe Ingredients </label></center>
-                        <textarea  class="form-control"
-                        id="recipe_ingredients" name="recipe_ingredients" required>
-                    </textarea>
+                        <textarea class="form-control" name="recipe_ingredients" >{{recipe[3]}}
+                        </textarea>
 
                 </div>
 
                 <div class="form-group">
                         <center><label for="recipe_methods">Recipe Preparation </label></center>
-                        <textarea  class="form-control"
-                        id="recipe_methods" name="recipe_methods" required>
-                    </textarea>
-
+                        <textarea class="form-control" name="recipe_methods">{{recipe[4]}}
+                        </textarea> 
                 </div>
 
 
                 <!-- Modal Footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
+                    <button type="button" class="btn btn-danger"
                     data-dismiss="modal">
-                    Close
+                    Cancel
                 </button>
                 <button type="submit" class="btn btn-primary">Edit Recipe
                 </button>

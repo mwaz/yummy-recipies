@@ -1,3 +1,4 @@
+"""Class to create, edit, delete recipes"""
 import re
 
 from models.user import Users
@@ -10,7 +11,7 @@ class Recipe(Users):
     """
       Recipe Class to handle methods to do with recipes
     """
-
+    
     def __init__(self, cat_name=None, owner=None, recipe_name=None, recipe_ingredients=None, recipe_methods=None):
         """ Initializing Recipe class instance variables"""
         self.cat_name = cat_name
@@ -40,13 +41,13 @@ class Recipe(Users):
 
         recipe_methods = None if recipe_methods == " " else recipe_methods
 
-        if not (recipe_name):
+        if not recipe_name:
             return "Null recipe name"
 
-        if not (recipe_ingredients):
+        if not recipe_ingredients:
             return "Null recipe ingredients"
 
-        if not (recipe_methods):
+        if not recipe_methods:
             return "Null recipe method"
 
         if not re.search(self.regex_name, recipe_name):
@@ -55,7 +56,7 @@ class Recipe(Users):
         if (any(recipe_name == recipe_list[1]
                 and owner == recipe_list[2]
                 and cat_name == recipe_list[0]
-                for recipe_list in self.recipes)) == True:
+                for recipe_list in self.recipes)) is True:
             # returns an error if the recipe name is in the same category
             # and having the same owner
 
@@ -67,10 +68,9 @@ class Recipe(Users):
         return "successfully created recipe"
 
     def recipe_edit(self, new_recipe_name, recipe_name, cat_name, owner, recipe_ingredients, recipe_methods):
-        """ method that defines how to edit a recipe, the method takes 
-            the new recipe name as a parameter, the recipe name and the category
-            name, all belonging to the logged in user
-        """
+        """ method that defines how to edit a recipe, the method takes
+        the new recipe name as a parameter, the recipe name and the category
+        name, all belonging to the logged in user"""
         if new_recipe_name:
             new_recipe_name = re.sub(r'\s+', ' ', new_recipe_name).strip()
 
@@ -89,7 +89,7 @@ class Recipe(Users):
         recipe_methods = None if recipe_methods == " " else recipe_methods
 
 
-        if not (new_recipe_name):
+        if not new_recipe_name:
             return "Null recipe name"
 
         if not re.search(self.regex_name, new_recipe_name):
@@ -98,8 +98,8 @@ class Recipe(Users):
         for recipe_list in self.recipes:
 
             # checks to find if the new recipe name exists in the recipes list
-            if (any(new_recipe_name == recipe_list[1] for
-                    recipe_list in self.recipes)) == True:
+            if (any(new_recipe_name == recipe_list[1] and recipe_ingredients == recipe_list[3] and recipe_methods ==  recipe_list[4] for
+                    recipe_list in self.recipes)) is True:
 
                 return "Recipe exists"
 
@@ -131,10 +131,8 @@ class Recipe(Users):
         return "unable to delete recipe"
 
     def view_recipe(self, cat_name, owner):
-        """
-        method to view all the recipes that belong to a category 
-        with the same owner
-         """
+        """method to view all the recipes that belong to a category
+        with the same owner"""
         recipe_data = self.recipes
         render_recipe_data = []
         for recipe in recipe_data:

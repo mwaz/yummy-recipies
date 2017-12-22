@@ -1,4 +1,7 @@
+"""Class that defines the creation of categories, 
+deletion and editing categories """
 import re
+
 
 from models.user import Users
 from models.recipe import Recipe
@@ -28,14 +31,14 @@ class Categories(Users):
 
         cat_name = None if cat_name == " " else cat_name.title()
 
-        if not(cat_name):
+        if not cat_name:
             return "Category name is null"
 
         if not re.search(self.regex_name, cat_name):
             return "category name has special characters"
 
         if (any(cat_name == category_list[0] and owner == category_list[1]
-                for category_list in self.recipe_categories)) == True:
+                for category_list in self.recipe_categories)) is True:
             return "Category exists"
 
         self.recipe_categories.append([cat_name, owner, ])
@@ -48,7 +51,7 @@ class Categories(Users):
 
         new_cat_name = None if new_cat_name == " " else new_cat_name
 
-        if not(new_cat_name):
+        if not new_cat_name:
             return "Null category name"
 
         if not re.search(self.regex_name, new_cat_name):
@@ -69,6 +72,7 @@ class Categories(Users):
         return "category name exists"
 
     def category_delete(self, cat_name, owner):
+        """Method to delete a category"""
 
         # method that defines the elements required delete a category
         # the for loop loops to check if the category name exists and
@@ -84,10 +88,8 @@ class Categories(Users):
         return "Category doesnt exist"
 
     def view_recipe_category(self, owner):
-        """
-        method used to display all the categories that are present in 
-            a users recipe_category list
-        """
+        """method used to display all the categories that are present in
+        a users recipe_category list"""
         category_data = self.recipe_categories
         render_category_data = []
         for category in category_data:

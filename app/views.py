@@ -1,3 +1,4 @@
+"""The vierws.py file deals with the logic used by the classes"""
 import os
 from flask import render_template, request, session, g, Flask
 from models.user import Users
@@ -21,11 +22,10 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    """ 
-    Handles the view for user registration, it then fetches 
+    """Handles the view for user registration, it then fetches
     the return messages in the register methods and returns appropriate
-    messages to the user through the templates
-    """
+    messages to the user through the templates"""
+
     if request.method == "POST":
         # gets the email, password, password and confirm password from the
         # registration.html template
@@ -84,11 +84,9 @@ def login():
         result_login = new_user.user_login(email, password)
 
         if result_login == "Success login":
-            username = new_user.get_registered_user_details(email)
-            email = new_user.get_registered_user_details(email)
-            session['user'] = username['username']
-
-            session['email'] = email['email']
+            user_details = new_user.get_registered_user_details(email)
+            session['user'] = user_details['username']
+            session['email'] = user_details['email']
             message = "login successful"
 
             # method in the Users class to display all the recipe categories of
@@ -139,8 +137,8 @@ def category_register():
             category_data = new_cat.view_recipe_category(g.owner)
 
             if category_create == "Successfully created category":
-                message = "Successfully created category"
-                return render_template("recipe-categories.html", success=message, data=category_data)
+                msg = "Successfully created category"
+                return render_template("recipe-categories.html", success=msg, data=category_data)
 
             elif category_create == "Category exists":
                 message = "Category exists"
@@ -327,7 +325,7 @@ def recipe_edit(category_name):
 
             if edit_recipe == "Successfully edited recipe":
                 message = "Successfully edited recipe"
-                return render_template("recipes.html",  message=cat_name, success=message, data=data)
+                return render_template("recipes.html", message=cat_name, success=message, data=data)
 
             elif edit_recipe == "Recipe exists":
                 error = "Can't edit Recipe! Recipe Name Exists"
